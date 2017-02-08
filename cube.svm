@@ -4,4 +4,8 @@
     <cube width="100" height="100" depth="100" color="red" />
     <text>Hi!</text>
   </group>
+  
+  <prism x="100" radius="25" height="200" color="blue" />
+  
+  <sphere y="-100" radius="25" color="green" />
 </svm>

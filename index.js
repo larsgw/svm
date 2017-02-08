@@ -11,6 +11,8 @@ const parseElement = function (elm) {
   if (elm.hasOwnProperty('name')) {
     switch (u(elm.name)) {
       case 'CUBE':
+      case 'PRISM':
+      case 'SPHERE':
         return shape[u(elm.name)](elm.attr)
         break
       
