@@ -1,0 +1,103 @@
+<style>.slide.html * { position:absolute }
+
+/*BEGIN Cuboid*/
+.cube .bottom,
+.cube .top,
+.cube .front,
+.cube .back,
+.cube .left,
+.cube .right { transform-origin:0 0;background-color:var(--cuboid-color); }
+
+.cube .bottom,
+.cube .top,
+.cube .front,
+.cube .back { width:var(--cuboid-width); }
+.cube .left,
+.cube .right,
+.cube .top,
+.cube .bottom { height:var(--cuboid-depth); }
+.cube .left,
+.cube .right { width:var(--cuboid-height); }
+.cube .front,
+.cube .back { height:var(--cuboid-height); }
+
+.cube .back  { transform:rotateX(90deg) }
+.cube .front { transform:rotateX(90deg) translateZ(calc(-1 * var(--cuboid-depth))) }
+.cube .left  { transform:rotateY(-90deg) }
+.cube .right { transform:rotateY(90deg) translate3d(calc(-1 * var(--cuboid-height)),0,var(--cuboid-width)) }
+.cube .top   { transform:translateZ(var(--cuboid-height)) }
+
+.cube .bottom:before,
+.cube .top:before,
+.cube .front:before,
+.cube .back:before,
+.cube .left:before,
+.cube .right:before { content:'';position:absolute;top:0;right:0;bottom:0;left:0; }
+.cube .back:before { background-color:rgba(0,0,0,.4); }
+.cube .bottom:before { background-color:rgba(0,0,0,.5); }
+.cube .front:before { background-color:rgba(0,0,0,.1); }
+.cube .left:before { background-color:rgba(0,0,0,.2); }
+.cube .right:before { background-color:rgba(0,0,0,.3); }
+/*END*/
+
+/*BEGIN Cilinder*/
+.cilinder {
+  --cilinder-angle: calc(360deg / var(--cilinder-components));
+  --cilinder-component-width: calc((6.98 * var(--cilinder-radius)) / var(--cilinder-components))
+}
+/* .cilinder:after { content:var(--cilinder-angle) var(--cilinder-components); } */
+.cilinder * { background-color:var(--cilinder-color); }
+.cilinder [class^=b] {
+  height: var(--cilinder-height);
+  width:  var(--cilinder-component-width);
+}
+.cilinder [class^=b]:before { content:'';position:absolute;top:0;right:0;bottom:0;left:0;background:black; }
+
+.cilinder [class^=a] {
+  transform-origin:50% 0;
+  width: calc(2 * var(--cilinder-radius));
+  height: calc(2 * var(--cilinder-radius));
+  border-radius: 100%;
+}
+.cilinder .a1  { transform:translateZ(calc(-1 * var(--cilinder-radius))) rotateX(90deg) }
+.cilinder .a2  { transform:translateZ(calc(-1 * var(--cilinder-radius))) rotateX(90deg) translateZ(calc(-1 * var(--cilinder-height))) }
+.cilinder .b1  { transform:rotateY(calc(var(--cilinder-angle) * 0 )) translateZ(var(--cilinder-radius)) }
+.cilinder .b2  { transform:rotateY(calc(var(--cilinder-angle) * 11)) translateZ(var(--cilinder-radius)) }
+.cilinder .b3  { transform:rotateY(calc(var(--cilinder-angle) * 1 )) translateZ(var(--cilinder-radius)) }
+.cilinder .b4  { transform:rotateY(calc(var(--cilinder-angle) * 10)) translateZ(var(--cilinder-radius)) }
+.cilinder .b5  { transform:rotateY(calc(var(--cilinder-angle) * 2 )) translateZ(var(--cilinder-radius)) }
+.cilinder .b6  { transform:rotateY(calc(var(--cilinder-angle) * 9 )) translateZ(var(--cilinder-radius)) }
+.cilinder .b7  { transform:rotateY(calc(var(--cilinder-angle) * 3 )) translateZ(var(--cilinder-radius)) }
+.cilinder .b8  { transform:rotateY(calc(var(--cilinder-angle) * 8 )) translateZ(var(--cilinder-radius)) }
+.cilinder .b9  { transform:rotateY(calc(var(--cilinder-angle) * 4 )) translateZ(var(--cilinder-radius)) }
+.cilinder .b10 { transform:rotateY(calc(var(--cilinder-angle) * 7 )) translateZ(var(--cilinder-radius)) }
+.cilinder .b11 { transform:rotateY(calc(var(--cilinder-angle) * 5 )) translateZ(var(--cilinder-radius)) }
+.cilinder .b12 { transform:rotateY(calc(var(--cilinder-angle) * 6 )) translateZ(var(--cilinder-radius)) }
+
+.cilinder .b1:before  { opacity: 0; }
+.cilinder .b2:before,
+.cilinder .b3:before  { opacity: calc(.1 * (12 / var(--cilinder-components))); }
+.cilinder .b4:before,
+.cilinder .b5:before  { opacity: calc(.2 * (12 / var(--cilinder-components))); }
+.cilinder .b6:before,
+.cilinder .b7:before  { opacity: calc(.3 * (12 / var(--cilinder-components))); }
+.cilinder .b8:before,
+.cilinder .b9:before  { opacity: calc(.4 * (12 / var(--cilinder-components))); }
+.cilinder .b10:before,
+.cilinder .b11:before { opacity: calc(.5 * (12 / var(--cilinder-components))); }
+.cilinder .b12:before { opacity: calc(.6 * (12 / var(--cilinder-components))); }
+/*END*/
+</style><div class="hi" data-name="cube">
+  
+  <div class="hi" data-name="">
+    <div class="cube" style="
+    --cuboid-width:100px;
+    --cuboid-height:100px;
+    --cuboid-depth:100px;
+    --cuboid-color:red;
+  ">
+    <div class="bottom"></div><div class="back"></div><div class="front"></div><div class="left"></div><div class="right"></div><div class="top"></div>
+  </div>
+    <div class="hi" data-name="">Hi!</div>
+  </div>
+</div>

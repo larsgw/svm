@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Presentatie</title>
+    <style>
+      @import url('https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.2.0/styles/default.min.css');
+      @import url('css/bootstrap.css');
+      @import url('https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css');
+      @import url('css/standard.css');
+      @import url('css/font.css');
+      @import url('css/style.css');
+      @import url('css/loading.css');
+      @import url('css/slides.css');
+      @import url('css/theme.css');
+    </style>
+    <link rel="shortcut icon" type="image/png" href="img/favicon.png" />
+  </head>
+  <body>
+  
+    <div id="V" class="T-s">
+      <header>
+	<div class="controls arrows">
+	  <h1 title="Choose a different presentation" class="title">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+	</div>
+      </header>
+      
+      <div class="slider"></div>
+      
+      <footer>
+	<div class="controls arrows">
+	  <div class="arrow arrow-prev"><i class="C-i">keyboard_arrow_left</i></div>
+	  <ul class="slider-dots no-list-style"></ul>
+	  <div class="arrow arrow-next"><i class="C-i">keyboard_arrow_right</i></div>
+	</div>
+      </footer>
+    </div>
+    
+    <!-- Polyfill -->
+    <script type="text/javascript">
+      //Array indexOf
+      Array.prototype.indexOf || (Array.prototype.indexOf = function(d, e) {
+	var a;
+	if (null == this) throw new TypeError('"this" is null or not defined');
+	var c = Object(this),
+	    b = c.length >>> 0;
+	if (0 === b) return -1;
+	a = +e || 0;
+	Infinity === Math.abs(a) && (a = 0);
+	if (a >= b) return -1;
+	for (a = Math.max(0 <= a ? a : b - Math.abs(a), 0); a < b;) {
+	  if (a in c && c[a] === d) return a;
+	  a++
+	}
+	return -1;
+      });
+    </script>
+    
+    <!-- Utilities -->
+    <script type="text/javascript">
+      // Array indexOf
+      Array.prototype.pop = function(i) {
+	if (null == this) throw new TypeError('"this" is null or not defined');
+	
+	if ( i === undefined ) return this.splice( this.length-1, 1)[0];
+	else if ( i > -1 )     return this.splice(           i  , 1)[0];
+	else return undefined;
+      };
+    </script>
+    
+    <!-- Libraries -->
+    <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/highlight.min.js"></script>
+    <script type="text/javascript" src="js/jquery.transit.js"></script>
+    <script type="text/javascript" src="js/mousewheel.js"></script>
+    
+    <!-- Slideshow data -->
+    <script type="text/javascript" > var adminAccount, OOAccount, SJSLoadHTML = [] </script>
+    <script type="text/javascript" src="js/adminaccount.js" class="load"></script>
+    <script type="text/javascript" src="js/ooaccount.js" class="load"></script>
+    <!-- Formatting and event handeling -->
+    <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/view.js"></script>
+    
+    <!-- 3d editor -->
+    <style>
+    #toggle-bar { background:rgba(0,0,0,.5);position:fixed;padding:5px;color:white; }
+    #toggle-bar { right:10px;top:10px;z-index:10000; }
+    #toggle-bar form:not(:first-child) { margin-top:15px; }
+    #toggle-bar form fieldset > * { vertical-align:middle;margin:0; }
+    #toggle-bar form fieldset label { font-weight:normal;padding-left:5px; }
+    </style>
+    <div id="toggle-bar"></div>
+    <script>function toggle3d(a){
+      var f = a.children('div')
+      
+      $.each(f,function(b,c){
+	var g = $(c).children()
+	  , k = $(c).attr('class')
+	
+	var h = $('#toggle-bar').append('<form><p><b>'+k+'</b></p></form>').find('form:last-child')
+	
+	$.each(g,function(d,e){
+	  var i = $(e).attr('class')
+	  h.append(
+	    '<fieldset><input class="layer" checked type="checkbox" value=".'+
+	    k.split(' ').join('.')+' .'+i+'"><label>'+i+'</label></fieldset>'
+	  )
+	})
+      })
+
+      $('input.layer').unbind('change').change(function(){
+	var j = $(this).val()
+	$('#V .slider .slide.html').find(j).toggle()
+      })
+    }</script>
+  </body>
+</html>

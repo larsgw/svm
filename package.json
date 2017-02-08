@@ -1,0 +1,15 @@
+{
+  "name": "svm",
+  "version": "0.1.0",
+  "description": "Scalable Vector 3d Models",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Lars Willighagen",
+  "license": "MIT",
+  "dependencies": {
+    "xml2js": "^0.4.17",
+    "xmldoc": "^1.0.0"
+  }
+}

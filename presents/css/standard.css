@@ -1,0 +1,43 @@
+/* Custom */
+
+ul {
+  list-style-type: none;
+}
+
+ul, .list {
+   padding:0;
+}
+
+ul > ul > li:before, ul:not(.slider-dots) > li:before {
+  content:'\2022';color:inherit;margin-right:.8em;
+}
+
+ul > li > .list {
+  margin-left: 20px;
+}
+
+ul > li > ul > li:before {
+  content:'-' !important;color:inherit !important;
+}
+
+p:first-letter, li:first-letter {
+  text-transform: uppercase;
+}
+
+/* General */
+
+.no-list-style { list-style-type: none        ; }
+.overline      { text-decoration: overline    ; }
+.line-through  { text-decoration: line-through; }
+.underline     { text-decoration: underline   ; }
+.no-line       { text-decoration: none        ; }
+.uppercase     { text-transform : uppercase   ; }
+.lowercase     { text-transform : lowercase   ; }
+
+a.facebook:before {
+  content: url("https://www.facebook.com/favicon.ico");
+  position: relative;
+  bottom: -3px;
+}
+
+.circle { border-radius:50%; }

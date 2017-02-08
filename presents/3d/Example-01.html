@@ -1,0 +1,193 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Example of a CSS 3D object and a drag-rotation function</title>
+    <style>
+      body { margin:0;padding:0;text-align:center;width:100%; }
+      body > div {
+	width:160px;height:160px;margin:200px 0 150px 0;display:inline-block;
+	-webkit-perspective:500px;
+	perspective:500px;
+      }
+      body > main {
+	display:inline-block;text-align:left;
+	width:300px;
+      }
+      body > div > div {
+	-webkit-transform-style:preserve-3d;
+	-moz-transform-style:preserve-3d;
+	-ms-transform-style:preserve-3d;
+	-o-transform-style:preserve-3d;
+	transform-style:preserve-3d;
+	-webkit-transform-origin:center center;
+	-moz-transform-origin:center center;
+	transform-origin:center center;
+	position:relative;width:160px;height:160px;
+      }
+      
+      div div:nth-child(1) div {
+	-webkit-transform-origin:center center;
+	-moz-transform-origin:center center;
+	transform-origin:center center;
+	
+	position:absolute;
+	width:110px;height:110px;
+	
+	opacity:.5;
+	border:25px solid;
+      }
+      
+      div div:nth-child(1) div:nth-child(1) {
+	border-color:#800;
+	-webkit-transform:rotateX(90deg);
+	-moz-transform:rotateX(90deg);
+	-ms-transform:rotateX(90deg);
+	transform:rotateX(90deg);
+      }
+      div div:nth-child(1) div:nth-child(2) {
+	border-color:#008;
+      }
+      div div:nth-child(1) div:nth-child(3) {
+	border-color:#080;
+	-webkit-transform:rotateY(90deg);
+	-moz-transform:rotateY(90deg);
+	-ms-transform:rotateY(90deg);
+	transform:rotateY(90deg);
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <div>
+	<div></div>
+	<div></div>
+	<div></div>
+      </div>
+    </div>
+    <br>
+    <main>
+      Controls:
+      <ul>
+	<li>W: Rotate X-axis clockwise</li>
+	<li>A: Rotate Y-axis clockwise</li>
+	<li>S: Rotate X-axis counterclockwise</li>
+	<li>D: Rotate Y-axis counterclockwise</li>
+	<li>I: Zoom in</li>
+	<li>K: Zoom out</li>
+	<li>Q: Reset</li>
+      </ul>
+    </main>
+    
+    <script type="text/javascript" src="../js/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.transit.js"></script>
+    <script type="text/javascript" src="../js/mousewheel.js"></script>
+    <script type="text/javascript">
+      var mov = { w:0,a:0,s:0,d:0,i:0,k:0 };
+      
+      $("body").keydown(function(e) {
+	ek = e.keyCode;
+	if (ek==65) mov.a=1;			// A 
+	if (ek==68) mov.d=1;			// D 
+	if (ek==87) mov.s=1;			// S 
+	if (ek==83) mov.w=1;			// W 
+	if (ek==73) mov.i=1;			// I 
+	if (ek==75) mov.k=1;			// K 
+	if (ek==81) $('body>div>div').transition({rotateX:'0',rotateY:'0',rotateZ:'0',scale:'1'},500);
+      });
+    
+      $("body").keyup(function(e) {
+	ek = e.keyCode;
+	if (ek==65) mov.a=0;			// A 
+	if (ek==68) mov.d=0;			// D 
+	if (ek==87) mov.s=0;			// S 
+	if (ek==83) mov.w=0;			// W 
+	if (ek==73) mov.i=0;			// I 
+	if (ek==75) mov.k=0;			// K 
+      });
+      
+      setInterval(function () {
+	if (mov.w) $('body>div>div').transition({rotateX:'+=1',queue:false},9);
+	if (mov.s) $('body>div>div').transition({rotateX:'-=1',queue:false},9);
+	if (mov.a) $('body>div>div').transition({rotateY:'+=1',queue:false},9);
+	if (mov.d) $('body>div>div').transition({rotateY:'-=1',queue:false},9);
+	if (mov.i) $('body>div>div').transition({scale:'+=.01',queue:false},9);
+	if (mov.k) $('body>div>div').transition({scale:'-=.01',queue:false},9);
+      },10);
+      
+      /* Robin */
+      var mouseDown = false;
+      var originalPos = null;
+      
+      $("body").on("mousedown", function(e) {
+	e.preventDefault();
+	mouseDown = true;
+	originalPos = {
+	  x: e.pageX,
+	  y: e.pageY
+	};
+      });
+      
+      $("body").on("mouseup", function() {
+	mouseDown= false;
+	originalPos = null;
+	mov = { w:0,a:0,s:0,d:0,i:0,k:0 };
+      });
+      
+      $("body").on("mousemove", function(e) {
+	if(!mouseDown){return;}
+	var offset = {
+	  x: e.pageX - originalPos.x,
+	  y: originalPos.y - e.pageY
+	};
+	
+	if(offset.x > 0) $('body>div>div').transition({rotateY:'+='+(offset.x* .3),queue:false},9);
+	if(offset.x < 0) $('body>div>div').transition({rotateY:'-='+(offset.x*-.3),queue:false},9);
+	if(offset.y > 0) $('body>div>div').transition({rotateX:'+='+(offset.y* .3),queue:false},9);
+	if(offset.y < 0) $('body>div>div').transition({rotateX:'-='+(offset.y*-.3),queue:false},9);
+	
+	originalPos = {
+	  x: e.pageX,
+	  y: e.pageY
+	};
+      });
+      
+      $("body").mousewheel(function(e){
+	var y = e.deltaY;
+	if(y>0) $('body>div>div').transition({scale:'-='+(y* .002),queue:false},9);
+	else    $('body>div>div').transition({scale:'+='+(y*-.002),queue:false},9);
+      });
+      
+      /*var mov = { w:0,a:0,s:0,d:0,i:0,k:0 };
+      
+      $("body").keydown(function(e) {
+	ek = e.keyCode;
+	if (ek==65) mov.a=1;			// A 
+	if (ek==68) mov.d=1;			// D 
+	if (ek==83) mov.s=1;			// S 
+	if (ek==87) mov.w=1;			// W 
+	if (ek==73) mov.i=1;			// I 
+	if (ek==75) mov.k=1;			// K 
+	if (ek==81) $('body>div>div').transition({rotateX:'0',rotateY:'0',rotateZ:'0',scale:'1'},500);
+      });
+    
+      $("body").keyup(function(e) {
+	ek = e.keyCode;
+	if (ek==65) mov.a=0;			// A 
+	if (ek==68) mov.d=0;			// D 
+	if (ek==83) mov.s=0;			// S 
+	if (ek==87) mov.w=0;			// W 
+	if (ek==73) mov.i=0;			// I 
+	if (ek==75) mov.k=0;			// K 
+      });
+      
+      setInterval(function () {
+	if (mov.w) $('body>div>div').transition({rotateX:'-=1'},9);
+	if (mov.s) $('body>div>div').transition({rotateX:'+=1'},9);
+	if (mov.a) $('body>div>div').transition({rotateY:'+=1'},9);
+	if (mov.d) $('body>div>div').transition({rotateY:'-=1'},9);	
+	if (mov.i) $('body>div>div').transition({scale:'+=.01'},9);
+	if (mov.k) $('body>div>div').transition({scale:'-=.01'},9);
+      },10);*/
+    </script>
+  </body>
+</html>
