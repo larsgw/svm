@@ -89,30 +89,10 @@
     #toggle-bar form:not(:first-child) { margin-top:15px; }
     #toggle-bar form fieldset > * { vertical-align:middle;margin:0; }
     #toggle-bar form fieldset label { font-weight:normal;padding-left:5px; }
+    #toggle-bar form ul ul {padding-left:20px;}
+    #toggle-bar form ul li:before {content:none !important}
     </style>
     <div id="toggle-bar"></div>
-    <script>function toggle3d(a){
-      var f = a.children('div')
-      
-      $.each(f,function(b,c){
-	var g = $(c).children()
-	  , k = $(c).attr('class')
-	
-	var h = $('#toggle-bar').append('<form><p><b>'+k+'</b></p></form>').find('form:last-child')
-	
-	$.each(g,function(d,e){
-	  var i = $(e).attr('class')
-	  h.append(
-	    '<fieldset><input class="layer" checked type="checkbox" value=".'+
-	    k.split(' ').join('.')+' .'+i+'"><label>'+i+'</label></fieldset>'
-	  )
-	})
-      })
-
-      $('input.layer').unbind('change').change(function(){
-	var j = $(this).val()
-	$('#V .slider .slide.html').find(j).toggle()
-      })
-    }</script>
+    <script type="text/javascript" src="../layers.js"></script>
   </body>
 </html>

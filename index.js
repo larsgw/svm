@@ -2,7 +2,8 @@ const fs = require('fs'),
       path = require('path'),
       xml2js = require('xml2js'),
       xml = require('xmldoc'),
-      {shape} = require('./lib/shapes')
+      {shape} = require('./lib/shapes'),
+      div = require('./lib/div')
 
 const u = v => v.toUpperCase()
 console.dir = function (obj) { return console.log(JSON.stringify(obj, null, 2)) }
@@ -13,16 +14,23 @@ const parseElement = function (elm) {
       case 'CUBE':
       case 'PRISM':
       case 'SPHERE':
-        return shape[u(elm.name)](elm.attr)
+        return shape(u(elm.name), elm.attr)
         break
       
       case 'GROUP':
-      case 'G':
-        return `<div class="hi" data-name="${elm.attr.name||``}">${elm.children.map(parseElement).join``}</div>`
+        return div({
+          role: 'group',
+          'data-name': elm.attr.name || ''},
+          elm.children.map(parseElement).join('')
+        )
+        break
+      
+      case 'SVM':
+        return div({role: 'root', 'data-name': elm.attr.name}, elm.children.map(parseElement).join``)
         break
       
       default:
-        return `<div class="hi" data-name="${elm.attr.name||``}">${elm.children.map(parseElement).join``}</div>`
+        return `<div class="hi">${elm.children.map(parseElement).join``}</div>`
         break
     }
   } else {
