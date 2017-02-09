@@ -46,11 +46,11 @@
   --cilinder-component-width: calc((6.98 * var(--cilinder-radius)) / var(--cilinder-components))
 }
 /* .cilinder:after { content:var(--cilinder-angle) var(--cilinder-components); } */
-.prism * { background-color:var(--cilinder-color); }
+.prism > * { background-color:var(--cilinder-color); }
 .prism [class^=b] {
   height: var(--cilinder-height);
   width:  var(--cilinder-component-width);
-  left: calc(-.5 * var(--cilinder-component-width));
+  left: calc(-.45 * var(--cilinder-component-width));
 }
 .prism [class^=b]:before { content:'';position:absolute;top:0;right:0;bottom:0;left:0;background:black; }
 
@@ -59,6 +59,7 @@
   width: calc(2 * var(--cilinder-radius));
   height: calc(2 * var(--cilinder-radius));
   border-radius: 100%;
+  background:transparent;
 }
 .prism .a1  { transform:translate3d(calc(-1 * var(--cilinder-radius)),0,calc(-1 * var(--cilinder-radius))) rotateX(90deg) }
 .prism .a2  { transform:translate3d(calc(-1 * var(--cilinder-radius)),0,calc(-1 * var(--cilinder-radius))) rotateX(90deg) translateZ(calc(-1 * var(--cilinder-height))) }

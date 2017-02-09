@@ -2,8 +2,12 @@ const fs = require('fs'),
       path = require('path'),
       xml2js = require('xml2js'),
       xml = require('xmldoc'),
-      {shape} = require('./lib/shapes'),
       div = require('./lib/div')
+
+global.opt = {}
+global.opt.maxZoom = 10
+
+const {shape} = require('./lib/shapes')
 
 const u = v => v.toUpperCase()
 console.dir = function (obj) { return console.log(JSON.stringify(obj, null, 2)) }
@@ -14,6 +18,7 @@ const parseElement = function (elm) {
       case 'CUBE':
       case 'PRISM':
       case 'SPHERE':
+      case 'PYRAMID':
         return shape(u(elm.name), elm.attr)
         break
       
