@@ -6,6 +6,7 @@ const fs = require('fs'),
 
 global.opt = {}
 global.opt.maxZoom = 10
+global.opt.maxSides = 12
 
 const {shape} = require('./lib/shapes')
 

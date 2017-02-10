@@ -11,6 +11,6 @@
     </group>
   </group>
   
-  <pyramid x="-150" radius="50" height="100" sides="3" color="purple" />
+  <pyramid x="-150" radius="25" height="100" sides="5" color="orange" />
   
 </svm>

@@ -9,6 +9,7 @@
   "author": "Lars Willighagen",
   "license": "MIT",
   "dependencies": {
+    "color": "^1.0.3",
     "xml2js": "^0.4.17",
     "xmldoc": "^1.0.0"
   }

@@ -1,5 +1,21 @@
 .slide.html * { position:absolute }
 
+/*BEGIN Pyramid*/
+.pyramid :before {content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:black;}
+.pyramid .a1:before {opacity:0;}
+.pyramid .a2:before {opacity:.05;}
+.pyramid .a3:before {opacity:.1;}
+.pyramid .a4:before {opacity:.15;}
+.pyramid .a5:before {opacity:.2;}
+.pyramid .a6:before {opacity:.25;}
+.pyramid .a7:before {opacity:.3;}
+.pyramid .a8:before {opacity:.35;}
+.pyramid .a9:before {opacity:.4;}
+.pyramid .a10:before {opacity:.45;}
+.pyramid .a11:before {opacity:.5;}
+.pyramid .a12:before {opacity:.55;}
+/*END*/
+
 /*BEGIN Cuboid*/
 .cube .bottom,
 .cube .top,
