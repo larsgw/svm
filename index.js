@@ -7,8 +7,12 @@ const fs = require('fs'),
 global.opt = {}
 global.opt.maxZoom = 10
 global.opt.maxSides = 12
+global.opt.maxShadow = .5
 
-const {shape} = require('./lib/shapes')
+const {
+  shape,
+  parsePositionAttributes
+} = require('./lib/shapes')
 
 const u = v => v.toUpperCase()
 console.dir = function (obj) { return console.log(JSON.stringify(obj, null, 2)) }
@@ -25,6 +29,7 @@ const parseElement = function (elm) {
       
       case 'GROUP':
         return div({
+          style: parsePositionAttributes(elm.attr, 0),
           role: 'group',
           'data-name': elm.attr.name || ''},
           elm.children.map(parseElement).join('')
@@ -44,8 +49,34 @@ const parseElement = function (elm) {
   }
 }
 
-fs.readFile(path.join(__dirname, 'cube.svm'), 'utf8', (err, data) => {
-  const xmlDoc = new xml.XmlDocument(data)
-  const style = fs.readFileSync(path.join(__dirname, '3d.css'), 'utf8')
-  fs.writeFileSync('cube.html', `<style>${style}</style>` + parseElement(xmlDoc))
+var config = fs.readFileSync(path.join(__dirname, '.svmconfig'), 'utf8')
+  .split('\n')
+  .filter(v => v)
+  .map(v => v.split(' '))
+  .map(([inFile, method, outFile]) => ({inFile, method, outFile}))
+
+config.forEach(v => {
+  try {
+    const data = fs.readFileSync(path.join(__dirname, v.inFile), 'utf8'),
+          xmlDoc = new xml.XmlDocument(data)
+    
+    let output
+    
+    switch (v.method) {
+      case 'html':
+        const style = fs.readFileSync(path.join(__dirname, '3d.css'), 'utf8')
+        output = `<style>${style}</style>` + parseElement(xmlDoc)
+        break
+      
+      default:
+        throw new Error('No valid parsing method provided!')
+        break
+    }
+    
+    fs.writeFileSync(v.outFile, output)
+  } catch (e) {
+    console.error(`File skipped: ${v.inFile}
+${e}
+`)
+  }
 })

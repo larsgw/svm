@@ -1,0 +1,33 @@
+<svm name="Shape tests">
+  
+  <group name="pyramids">
+    <pyramid x="-225" radius="25" height="100" sides="3" color="red" />
+    <pyramid x="-150" radius="25" height="100" sides="4" color="orange" />
+    <pyramid x="-75" radius="25" height="100" sides="5" color="yellow" />
+    <pyramid x="0" radius="25" height="100" sides="6" color="lime" />
+    <pyramid x="75" radius="25" height="100" sides="7" color="green" />
+    <pyramid x="150" radius="25" height="100" sides="8" color="blue" />
+    <pyramid x="225" radius="25" height="100" sides="9" color="purple" />
+  </group>
+  
+  <group z="100" name="prisms">
+    <prism x="-225" radius="25" height="100" sides="3" color="red" />
+    <prism x="-150" radius="25" height="100" sides="4" color="orange" />
+    <prism x="-75" radius="25" height="100" sides="5" color="yellow" />
+    <prism x="0" radius="25" height="100" sides="6" color="lime" />
+    <prism x="75" radius="25" height="100" sides="7" color="green" />
+    <prism x="150" radius="25" height="100" sides="8" color="blue" />
+    <prism x="225" radius="25" height="100" sides="9" color="purple" />
+  </group>
+  
+  <group z="200" name="cubes">
+    <cube x="-225" width="50" depth="50" height="50" color="red" />
+    <cube x="-150" width="50" depth="50" height="50" color="orange" />
+    <cube x="-75" width="50" depth="50" height="50" color="yellow" />
+    <cube x="0" width="50" depth="50" height="50" color="lime" />
+    <cube x="75" width="50" depth="50" height="50" color="green" />
+    <cube x="150" width="50" depth="50" height="50" color="blue" />
+    <cube x="225" width="50" depth="50" height="50" color="purple" />
+  </group>
+  
+</svm>

@@ -5,12 +5,14 @@
     <group name="cilinder">
       <prism x="50" z="50" y ="-100" radius="25" height="100" color="blue" />
     
-      <group name="ball">
-        <sphere x="50" z ="50" y="-125" radius="25" color="green" />
-      </group>
+<!--       <group name="ball"> -->
+<!--         <sphere x="50" z ="50" y="-200" radius="25" color="green" /> -->
+<!--       </group> -->
     </group>
   </group>
   
   <pyramid x="-150" radius="25" height="100" sides="5" color="orange" />
+  
+  <prism x="-50" sides="12" radius="10" color="yellow" height="100" rx="90"/>
   
 </svm>

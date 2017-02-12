@@ -139,8 +139,8 @@ function switchSlide(cs,ns,cd,nd,dx){
       if(data.z){if(data.z.slice(-2)=='cm')data.z=(parseFloat(data.z.slice(0,-2))*cm).toString()+'px'};
       
       var pos = {
-	x: -(parseInt  (data. x)+slidewidth ),
-	y: -(parseInt  (data. y)+slideheight),
+	x: -(parseInt  (data. x) ),
+	y: -(parseInt  (data. y)),
 	z: - parseInt  (data. z)             ,
 	rx:- parseInt  (data.rx)             ,
 	ry:- parseInt  (data.ry)             ,
