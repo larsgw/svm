@@ -35,13 +35,21 @@ function displaySlides(slideshow){
     if(puzzle)$('#V div.slides').append(slide);
     else      $('#V div.slider').append(slide);
     
-    var slideHTML = puzzle ? $('#V div.slides') : $('#V div.slider') ,
-	idx = parseInt(slideHTML.data('idx'));
-	slideHTML = slideHTML.find('.slide').last().find('.content-replace');
-    if(slideHTML.length)SJSLoadHTML[idx]=false;
+    var slideHTML = (puzzle ?
+      $('#V div.slides')
+    :
+      $('#V div.slider'))
+        .find('.slide')
+        .last()
+        .find('.content-replace')
+    
+    if (slideHTML.length)
+      SJSLoadHTML[i] = false;
+    
     slideHTML.parent().load(slideHTML.data('content-url'),function(){
+      var idx = $(this).closest('.slide').data('idx')
       SJSLoadHTML[idx] = true;
-      toggle3d($(this))
+      if (!SJSLoadHTML.some(v=>!v)) toggle3d($('#V'))
     });
   }
   

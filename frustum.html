@@ -1,0 +1,1176 @@
+<style>.slide.html * { position:absolute }
+
+/*BEGIN Pyramid*/
+/*.pyramid :before {content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:black;}
+.pyramid .a1:before {opacity:0;}
+.pyramid .a2:before {opacity:.05;}
+.pyramid .a3:before {opacity:.1;}
+.pyramid .a4:before {opacity:.15;}
+.pyramid .a5:before {opacity:.2;}
+.pyramid .a6:before {opacity:.25;}
+.pyramid .a7:before {opacity:.3;}
+.pyramid .a8:before {opacity:.35;}
+.pyramid .a9:before {opacity:.4;}
+.pyramid .a10:before {opacity:.45;}
+.pyramid .a11:before {opacity:.5;}
+.pyramid .a12:before {opacity:.55;}*/
+/*END*/
+
+/*BEGIN Cuboid*/
+.cube .bottom,
+.cube .top,
+.cube .front,
+.cube .back,
+.cube .left,
+.cube .right { transform-origin:0 0;background-color:var(--cuboid-color); }
+
+.cube .bottom,
+.cube .top,
+.cube .front,
+.cube .back { width:var(--cuboid-width); }
+.cube .left,
+.cube .right,
+.cube .top,
+.cube .bottom { height:var(--cuboid-depth); }
+.cube .left,
+.cube .right { width:var(--cuboid-height); }
+.cube .front,
+.cube .back { height:var(--cuboid-height); }
+
+.cube .back  { transform:rotateX(90deg) }
+.cube .front { transform:rotateX(90deg) translateZ(calc(-1 * var(--cuboid-depth))) }
+.cube .left  { transform:rotateY(-90deg) }
+.cube .right { transform:rotateY(90deg) translate3d(calc(-1 * var(--cuboid-height)),0,var(--cuboid-width)) }
+.cube .top   { transform:translateZ(var(--cuboid-height)) }
+
+.cube .bottom:before,
+.cube .top:before,
+.cube .front:before,
+.cube .back:before,
+.cube .left:before,
+.cube .right:before { content:'';position:absolute;top:0;right:0;bottom:0;left:0; }
+.cube .back:before { background-color:rgba(0,0,0,.4); }
+.cube .bottom:before { background-color:rgba(0,0,0,.5); }
+.cube .front:before { background-color:rgba(0,0,0,.1); }
+.cube .left:before { background-color:rgba(0,0,0,.2); }
+.cube .right:before { background-color:rgba(0,0,0,.3); }
+/*END*/
+
+/*BEGIN Cilinder*
+.prism {
+  --cilinder-angle: calc(360deg / var(--cilinder-components));
+  --cilinder-component-width: calc((6.98 * var(--cilinder-radius)) / var(--cilinder-components))
+}
+/* .cilinder:after { content:var(--cilinder-angle) var(--cilinder-components); } *
+.prism > * { background-color:var(--cilinder-color); }
+.prism [class^=b] {
+  height: var(--cilinder-height);
+  width:  var(--cilinder-component-width);
+  left: calc(-.45 * var(--cilinder-component-width));
+}
+.prism [class^=b]:before { content:'';position:absolute;top:0;right:0;bottom:0;left:0;background:black; }
+
+.prism [class^=a] {
+  transform-origin:50% 0;
+  width: calc(2 * var(--cilinder-radius));
+  height: calc(2 * var(--cilinder-radius));
+  border-radius: 100%;
+  background:transparent;
+}
+.prism .a1  { transform:translate3d(calc(-1 * var(--cilinder-radius)),0,calc(-1 * var(--cilinder-radius))) rotateX(90deg) }
+.prism .a2  { transform:translate3d(calc(-1 * var(--cilinder-radius)),0,calc(-1 * var(--cilinder-radius))) rotateX(90deg) translateZ(calc(-1 * var(--cilinder-height))) }
+.prism .b1  { transform:rotateY(calc(var(--cilinder-angle) * 0 )) translateZ(var(--cilinder-radius)) }
+.prism .b2  { transform:rotateY(calc(var(--cilinder-angle) * 11)) translateZ(var(--cilinder-radius)) }
+.prism .b3  { transform:rotateY(calc(var(--cilinder-angle) * 1 )) translateZ(var(--cilinder-radius)) }
+.prism .b4  { transform:rotateY(calc(var(--cilinder-angle) * 10)) translateZ(var(--cilinder-radius)) }
+.prism .b5  { transform:rotateY(calc(var(--cilinder-angle) * 2 )) translateZ(var(--cilinder-radius)) }
+.prism .b6  { transform:rotateY(calc(var(--cilinder-angle) * 9 )) translateZ(var(--cilinder-radius)) }
+.prism .b7  { transform:rotateY(calc(var(--cilinder-angle) * 3 )) translateZ(var(--cilinder-radius)) }
+.prism .b8  { transform:rotateY(calc(var(--cilinder-angle) * 8 )) translateZ(var(--cilinder-radius)) }
+.prism .b9  { transform:rotateY(calc(var(--cilinder-angle) * 4 )) translateZ(var(--cilinder-radius)) }
+.prism .b10 { transform:rotateY(calc(var(--cilinder-angle) * 7 )) translateZ(var(--cilinder-radius)) }
+.prism .b11 { transform:rotateY(calc(var(--cilinder-angle) * 5 )) translateZ(var(--cilinder-radius)) }
+.prism .b12 { transform:rotateY(calc(var(--cilinder-angle) * 6 )) translateZ(var(--cilinder-radius)) }
+
+.prism .b1:before  { opacity: 0; }
+.prism .b2:before,
+.prism .b3:before  { opacity: calc(.1 * (12 / var(--cilinder-components))); }
+.prism .b4:before,
+.prism .b5:before  { opacity: calc(.2 * (12 / var(--cilinder-components))); }
+.prism .b6:before,
+.prism .b7:before  { opacity: calc(.3 * (12 / var(--cilinder-components))); }
+.prism .b8:before,
+.prism .b9:before  { opacity: calc(.4 * (12 / var(--cilinder-components))); }
+.prism .b10:before,
+.prism .b11:before { opacity: calc(.5 * (12 / var(--cilinder-components))); }
+.prism .b12:before { opacity: calc(.6 * (12 / var(--cilinder-components))); }
+/*END*/
+</style><div 
+      role
+      ="root"
+     
+      data-name
+      ="Shape tests II"
+    >
+  
+  <div 
+      role
+      ="group"
+     
+      data-name
+      ="frustums"
+     
+      style
+      ="transform:"
+    >
+    <div 
+      role
+      ="shape"
+     
+      data-shape
+      ="frustum"
+     
+      style
+      ="transform: translateY(-100px) translateX(-225px) ; "
+    ><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-21.65px) translateY(-0.78px)translateZ(12.5px) rotateX(7.13deg);width:43.3px;height:100.78px"
+    ><svg
+    style="transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)" width="433.01" height="1007.78"
+  >
+    <path fill="hsl(0, 100%, 50%)" d="
+      M0 0 M433.01 1007.78
+      M0 1007.78 H433.01
+      L324.76 503.89
+      H108.25 Z
+    ">
+  </svg></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-21.65px)rotateY(120deg) translateY(-0.78px)translateZ(12.5px) rotateX(7.13deg);width:43.3px;height:100.78px"
+    ><svg
+    style="transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)" width="433.01" height="1007.78"
+  >
+    <path fill="hsl(0, 100%, 33.3%)" d="
+      M0 0 M433.01 1007.78
+      M0 1007.78 H433.01
+      L324.76 503.89
+      H108.25 Z
+    ">
+  </svg></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-21.65px)rotateY(240deg) translateY(-0.78px)translateZ(12.5px) rotateX(7.13deg);width:43.3px;height:100.78px"
+    ><svg
+    style="transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)" width="433.01" height="1007.78"
+  >
+    <path fill="hsl(0, 100%, 33.3%)" d="
+      M0 0 M433.01 1007.78
+      M0 1007.78 H433.01
+      L324.76 503.89
+      H108.25 Z
+    ">
+  </svg></div><div 
+      style
+      ="transform:translateX(-25px)translateY(75px)rotateX(-90deg);height:50px"
+    ><svg width="500" height="500"
+    style="transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)"
+  >
+    <path fill="hsl(0, 100%, 25%)" d="
+      M0 0 M500 500
+      M466.51 125 L250 500 L33.49 125 Z
+    ">
+  </svg></div></div>
+    <div 
+      role
+      ="shape"
+     
+      data-shape
+      ="frustum"
+     
+      style
+      ="transform: translateY(-100px) translateX(-150px) ; "
+    ><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-17.68px) translateY(-1.55px)translateZ(17.68px) rotateX(10.02deg);width:35.36px;height:101.55px"
+    ><svg
+    style="transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)" width="353.55" height="1015.5"
+  >
+    <path fill="hsl(38.80000000000001, 100%, 50%)" d="
+      M0 0 M353.55 1015.5
+      M0 1015.5 H353.55
+      L265.165 507.75
+      H88.385 Z
+    ">
+  </svg></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-17.68px)rotateY(90deg) translateY(-1.55px)translateZ(17.68px) rotateX(10.02deg);width:35.36px;height:101.55px"
+    ><svg
+    style="transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)" width="353.55" height="1015.5"
+  >
+    <path fill="hsl(38.80000000000001, 100%, 37.5%)" d="
+      M0 0 M353.55 1015.5
+      M0 1015.5 H353.55
+      L265.165 507.75
+      H88.385 Z
+    ">
+  </svg></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-17.68px)rotateY(180deg) translateY(-1.55px)translateZ(17.68px) rotateX(10.02deg);width:35.36px;height:101.55px"
+    ><svg
+    style="transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)" width="353.55" height="1015.5"
+  >
+    <path fill="hsl(38.80000000000001, 100%, 25%)" d="
+      M0 0 M353.55 1015.5
+      M0 1015.5 H353.55
+      L265.165 507.75
+      H88.385 Z
+    ">
+  </svg></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-17.68px)rotateY(270deg) translateY(-1.55px)translateZ(17.68px) rotateX(10.02deg);width:35.36px;height:101.55px"
+    ><svg
+    style="transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)" width="353.55" height="1015.5"
+  >
+    <path fill="hsl(38.80000000000001, 100%, 37.5%)" d="
+      M0 0 M353.55 1015.5
+      M0 1015.5 H353.55
+      L265.165 507.75
+      H88.385 Z
+    ">
+  </svg></div><div 
+      style
+      ="transform:translateX(-25px)translateY(75px)rotateX(-90deg);height:50px"
+    ><svg width="500" height="500"
+    style="transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)"
+  >
+    <path fill="hsl(38.80000000000001, 100%, 25%)" d="
+      M0 0 M500 500
+      M426.78 73.22 L426.78 426.78 L73.22 426.78 L73.22 73.22 Z
+    ">
+  </svg></div></div>
+    <div 
+      role
+      ="shape"
+     
+      data-shape
+      ="frustum"
+     
+      style
+      ="transform: translateY(-100px) translateX(-75px) ; "
+    ><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-14.69px) translateY(-2.02px)translateZ(20.23px) rotateX(11.43deg);width:29.39px;height:102.02px"
+    ><svg
+    style="transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)" width="293.89" height="1020.25"
+  >
+    <path fill="hsl(60, 100%, 50%)" d="
+      M0 0 M293.89 1020.25
+      M0 1020.25 H293.89
+      L220.42 510.13
+      H73.47 Z
+    ">
+  </svg></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-14.69px)rotateY(72deg) translateY(-2.02px)translateZ(20.23px) rotateX(11.43deg);width:29.39px;height:102.02px"
+    ><svg
+    style="transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)" width="293.89" height="1020.25"
+  >
+    <path fill="hsl(60, 100%, 40%)" d="
+      M0 0 M293.89 1020.25
+      M0 1020.25 H293.89
+      L220.42 510.13
+      H73.47 Z
+    ">
+  </svg></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-14.69px)rotateY(144deg) translateY(-2.02px)translateZ(20.23px) rotateX(11.43deg);width:29.39px;height:102.02px"
+    ><svg
+    style="transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)" width="293.89" height="1020.25"
+  >
+    <path fill="hsl(60, 100%, 30%)" d="
+      M0 0 M293.89 1020.25
+      M0 1020.25 H293.89
+      L220.42 510.13
+      H73.47 Z
+    ">
+  </svg></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-14.69px)rotateY(216deg) translateY(-2.02px)translateZ(20.23px) rotateX(11.43deg);width:29.39px;height:102.02px"
+    ><svg
+    style="transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)" width="293.89" height="1020.25"
+  >
+    <path fill="hsl(60, 100%, 30%)" d="
+      M0 0 M293.89 1020.25
+      M0 1020.25 H293.89
+      L220.42 510.13
+      H73.47 Z
+    ">
+  </svg></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-14.69px)rotateY(288deg) translateY(-2.02px)translateZ(20.23px) rotateX(11.43deg);width:29.39px;height:102.02px"
+    ><svg
+    style="transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)" width="293.89" height="1020.25"
+  >
+    <path fill="hsl(60, 100%, 40%)" d="
+      M0 0 M293.89 1020.25
+      M0 1020.25 H293.89
+      L220.42 510.13
+      H73.47 Z
+    ">
+  </svg></div><div 
+      style
+      ="transform:translateX(-25px)translateY(75px)rotateX(-90deg);height:50px"
+    ><svg width="500" height="500"
+    style="transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)"
+  >
+    <path fill="hsl(60, 100%, 25%)" d="
+      M0 0 M500 500
+      M396.95 47.75 L487.76 327.25 L250 500 L12.24 327.25 L103.05 47.75 Z
+    ">
+  </svg></div></div>
+    <div 
+      role
+      ="shape"
+     
+      data-shape
+      ="frustum"
+     
+      style
+      ="transform: translateY(-100px) translateX(0px) ; "
+    ><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-12.5px) translateY(-2.32px)translateZ(21.65px) rotateX(12.22deg);width:25px;height:102.32px"
+    ><svg
+    style="transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)" width="250" height="1023.17"
+  >
+    <path fill="hsl(120, 100%, 50%)" d="
+      M0 0 M250 1023.17
+      M0 1023.17 H250
+      L187.5 511.59
+      H62.5 Z
+    ">
+  </svg></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-12.5px)rotateY(60deg) translateY(-2.32px)translateZ(21.65px) rotateX(12.22deg);width:25px;height:102.32px"
+    ><svg
+    style="transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)" width="250" height="1023.17"
+  >
+    <path fill="hsl(120, 100%, 41.7%)" d="
+      M0 0 M250 1023.17
+      M0 1023.17 H250
+      L187.5 511.59
+      H62.5 Z
+    ">
+  </svg></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-12.5px)rotateY(120deg) translateY(-2.32px)translateZ(21.65px) rotateX(12.22deg);width:25px;height:102.32px"
+    ><svg
+    style="transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)" width="250" height="1023.17"
+  >
+    <path fill="hsl(120, 100%, 33.3%)" d="
+      M0 0 M250 1023.17
+      M0 1023.17 H250
+      L187.5 511.59
+      H62.5 Z
+    ">
+  </svg></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-12.5px)rotateY(180deg) translateY(-2.32px)translateZ(21.65px) rotateX(12.22deg);width:25px;height:102.32px"
+    ><svg
+    style="transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)" width="250" height="1023.17"
+  >
+    <path fill="hsl(120, 100%, 25%)" d="
+      M0 0 M250 1023.17
+      M0 1023.17 H250
+      L187.5 511.59
+      H62.5 Z
+    ">
+  </svg></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-12.5px)rotateY(240deg) translateY(-2.32px)translateZ(21.65px) rotateX(12.22deg);width:25px;height:102.32px"
+    ><svg
+    style="transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)" width="250" height="1023.17"
+  >
+    <path fill="hsl(120, 100%, 33.3%)" d="
+      M0 0 M250 1023.17
+      M0 1023.17 H250
+      L187.5 511.59
+      H62.5 Z
+    ">
+  </svg></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-12.5px)rotateY(300deg) translateY(-2.32px)translateZ(21.65px) rotateX(12.22deg);width:25px;height:102.32px"
+    ><svg
+    style="transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)" width="250" height="1023.17"
+  >
+    <path fill="hsl(120, 100%, 41.7%)" d="
+      M0 0 M250 1023.17
+      M0 1023.17 H250
+      L187.5 511.59
+      H62.5 Z
+    ">
+  </svg></div><div 
+      style
+      ="transform:translateX(-25px)translateY(75px)rotateX(-90deg);height:50px"
+    ><svg width="500" height="500"
+    style="transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)"
+  >
+    <path fill="hsl(120, 100%, 25%)" d="
+      M0 0 M500 500
+      M375 33.49 L500 250 L375 466.51 L125 466.51 L0 250 L125 33.49 Z
+    ">
+  </svg></div></div>
+    <div 
+      role
+      ="shape"
+     
+      data-shape
+      ="frustum"
+     
+      style
+      ="transform: translateY(-100px) translateX(75px) ; "
+    ><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-10.85px) translateY(-2.51px)translateZ(22.52px) rotateX(12.69deg);width:21.69px;height:102.51px"
+    ><svg
+    style="transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)" width="216.94" height="1025.05"
+  >
+    <path fill="hsl(120, 100%, 25.1%)" d="
+      M0 0 M216.94 1025.05
+      M0 1025.05 H216.94
+      L162.70499999999998 512.52
+      H54.235 Z
+    ">
+  </svg></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-10.85px)rotateY(51.43deg) translateY(-2.51px)translateZ(22.52px) rotateX(12.69deg);width:21.69px;height:102.51px"
+    ><svg
+    style="transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)" width="216.94" height="1025.05"
+  >
+    <path fill="hsl(120, 100%, 21.5%)" d="
+      M0 0 M216.94 1025.05
+      M0 1025.05 H216.94
+      L162.70499999999998 512.52
+      H54.235 Z
+    ">
+  </svg></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-10.85px)rotateY(102.86deg) translateY(-2.51px)translateZ(22.52px) rotateX(12.69deg);width:21.69px;height:102.51px"
+    ><svg
+    style="transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)" width="216.94" height="1025.05"
+  >
+    <path fill="hsl(120, 100%, 17.9%)" d="
+      M0 0 M216.94 1025.05
+      M0 1025.05 H216.94
+      L162.70499999999998 512.52
+      H54.235 Z
+    ">
+  </svg></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-10.85px)rotateY(154.29deg) translateY(-2.51px)translateZ(22.52px) rotateX(12.69deg);width:21.69px;height:102.51px"
+    ><svg
+    style="transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)" width="216.94" height="1025.05"
+  >
+    <path fill="hsl(120, 100%, 14.3%)" d="
+      M0 0 M216.94 1025.05
+      M0 1025.05 H216.94
+      L162.70499999999998 512.52
+      H54.235 Z
+    ">
+  </svg></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-10.85px)rotateY(205.71deg) translateY(-2.51px)translateZ(22.52px) rotateX(12.69deg);width:21.69px;height:102.51px"
+    ><svg
+    style="transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)" width="216.94" height="1025.05"
+  >
+    <path fill="hsl(120, 100%, 14.3%)" d="
+      M0 0 M216.94 1025.05
+      M0 1025.05 H216.94
+      L162.70499999999998 512.52
+      H54.235 Z
+    ">
+  </svg></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-10.85px)rotateY(257.14deg) translateY(-2.51px)translateZ(22.52px) rotateX(12.69deg);width:21.69px;height:102.51px"
+    ><svg
+    style="transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)" width="216.94" height="1025.05"
+  >
+    <path fill="hsl(120, 100%, 17.9%)" d="
+      M0 0 M216.94 1025.05
+      M0 1025.05 H216.94
+      L162.70499999999998 512.52
+      H54.235 Z
+    ">
+  </svg></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-10.85px)rotateY(308.57deg) translateY(-2.51px)translateZ(22.52px) rotateX(12.69deg);width:21.69px;height:102.51px"
+    ><svg
+    style="transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)" width="216.94" height="1025.05"
+  >
+    <path fill="hsl(120, 100%, 21.5%)" d="
+      M0 0 M216.94 1025.05
+      M0 1025.05 H216.94
+      L162.70499999999998 512.52
+      H54.235 Z
+    ">
+  </svg></div><div 
+      style
+      ="transform:translateX(-25px)translateY(75px)rotateX(-90deg);height:50px"
+    ><svg width="500" height="500"
+    style="transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)"
+  >
+    <path fill="hsl(120, 100%, 12.5%)" d="
+      M0 0 M500 500
+      M358.47 24.76 L493.73 194.37 L445.46 405.87 L250 500 L54.54 405.87 L6.27 194.37 L141.53 24.76 Z
+    ">
+  </svg></div></div>
+    <div 
+      role
+      ="shape"
+     
+      data-shape
+      ="frustum"
+     
+      style
+      ="transform: translateY(-100px) translateX(150px) ; "
+    ><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-9.57px) translateY(-2.63px)translateZ(23.1px) rotateX(13.01deg);width:19.13px;height:102.63px"
+    ><svg
+    style="transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)" width="191.34" height="1026.33"
+  >
+    <path fill="hsl(240, 100%, 50%)" d="
+      M0 0 M191.34 1026.33
+      M0 1026.33 H191.34
+      L143.505 513.17
+      H47.835 Z
+    ">
+  </svg></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-9.57px)rotateY(45deg) translateY(-2.63px)translateZ(23.1px) rotateX(13.01deg);width:19.13px;height:102.63px"
+    ><svg
+    style="transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)" width="191.34" height="1026.33"
+  >
+    <path fill="hsl(240, 100%, 43.8%)" d="
+      M0 0 M191.34 1026.33
+      M0 1026.33 H191.34
+      L143.505 513.17
+      H47.835 Z
+    ">
+  </svg></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-9.57px)rotateY(90deg) translateY(-2.63px)translateZ(23.1px) rotateX(13.01deg);width:19.13px;height:102.63px"
+    ><svg
+    style="transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)" width="191.34" height="1026.33"
+  >
+    <path fill="hsl(240, 100%, 37.5%)" d="
+      M0 0 M191.34 1026.33
+      M0 1026.33 H191.34
+      L143.505 513.17
+      H47.835 Z
+    ">
+  </svg></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-9.57px)rotateY(135deg) translateY(-2.63px)translateZ(23.1px) rotateX(13.01deg);width:19.13px;height:102.63px"
+    ><svg
+    style="transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)" width="191.34" height="1026.33"
+  >
+    <path fill="hsl(240, 100%, 31.3%)" d="
+      M0 0 M191.34 1026.33
+      M0 1026.33 H191.34
+      L143.505 513.17
+      H47.835 Z
+    ">
+  </svg></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-9.57px)rotateY(180deg) translateY(-2.63px)translateZ(23.1px) rotateX(13.01deg);width:19.13px;height:102.63px"
+    ><svg
+    style="transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)" width="191.34" height="1026.33"
+  >
+    <path fill="hsl(240, 100%, 25%)" d="
+      M0 0 M191.34 1026.33
+      M0 1026.33 H191.34
+      L143.505 513.17
+      H47.835 Z
+    ">
+  </svg></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-9.57px)rotateY(225deg) translateY(-2.63px)translateZ(23.1px) rotateX(13.01deg);width:19.13px;height:102.63px"
+    ><svg
+    style="transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)" width="191.34" height="1026.33"
+  >
+    <path fill="hsl(240, 100%, 31.3%)" d="
+      M0 0 M191.34 1026.33
+      M0 1026.33 H191.34
+      L143.505 513.17
+      H47.835 Z
+    ">
+  </svg></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-9.57px)rotateY(270deg) translateY(-2.63px)translateZ(23.1px) rotateX(13.01deg);width:19.13px;height:102.63px"
+    ><svg
+    style="transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)" width="191.34" height="1026.33"
+  >
+    <path fill="hsl(240, 100%, 37.5%)" d="
+      M0 0 M191.34 1026.33
+      M0 1026.33 H191.34
+      L143.505 513.17
+      H47.835 Z
+    ">
+  </svg></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-9.57px)rotateY(315deg) translateY(-2.63px)translateZ(23.1px) rotateX(13.01deg);width:19.13px;height:102.63px"
+    ><svg
+    style="transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)" width="191.34" height="1026.33"
+  >
+    <path fill="hsl(240, 100%, 43.8%)" d="
+      M0 0 M191.34 1026.33
+      M0 1026.33 H191.34
+      L143.505 513.17
+      H47.835 Z
+    ">
+  </svg></div><div 
+      style
+      ="transform:translateX(-25px)translateY(75px)rotateX(-90deg);height:50px"
+    ><svg width="500" height="500"
+    style="transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)"
+  >
+    <path fill="hsl(240, 100%, 25%)" d="
+      M0 0 M500 500
+      M345.67 19.03 L480.97 154.33 L480.97 345.67 L345.67 480.97 L154.33 480.97 L19.03 345.67 L19.03 154.33 L154.33 19.03 Z
+    ">
+  </svg></div></div>
+    <div 
+      role
+      ="shape"
+     
+      data-shape
+      ="frustum"
+     
+      style
+      ="transform: translateY(-100px) translateX(225px) ; "
+    ><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-8.55px) translateY(-2.72px)translateZ(23.49px) rotateX(13.22deg);width:17.1px;height:102.72px"
+    ><svg
+    style="transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)" width="171.01" height="1027.22"
+  >
+    <path fill="hsl(300, 100%, 25.1%)" d="
+      M0 0 M171.01 1027.22
+      M0 1027.22 H171.01
+      L128.26 513.61
+      H42.74999999999999 Z
+    ">
+  </svg></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-8.55px)rotateY(40deg) translateY(-2.72px)translateZ(23.49px) rotateX(13.22deg);width:17.1px;height:102.72px"
+    ><svg
+    style="transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)" width="171.01" height="1027.22"
+  >
+    <path fill="hsl(300, 100%, 22.3%)" d="
+      M0 0 M171.01 1027.22
+      M0 1027.22 H171.01
+      L128.26 513.61
+      H42.74999999999999 Z
+    ">
+  </svg></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-8.55px)rotateY(80deg) translateY(-2.72px)translateZ(23.49px) rotateX(13.22deg);width:17.1px;height:102.72px"
+    ><svg
+    style="transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)" width="171.01" height="1027.22"
+  >
+    <path fill="hsl(300, 100%, 19.5%)" d="
+      M0 0 M171.01 1027.22
+      M0 1027.22 H171.01
+      L128.26 513.61
+      H42.74999999999999 Z
+    ">
+  </svg></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-8.55px)rotateY(120deg) translateY(-2.72px)translateZ(23.49px) rotateX(13.22deg);width:17.1px;height:102.72px"
+    ><svg
+    style="transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)" width="171.01" height="1027.22"
+  >
+    <path fill="hsl(300, 100%, 16.7%)" d="
+      M0 0 M171.01 1027.22
+      M0 1027.22 H171.01
+      L128.26 513.61
+      H42.74999999999999 Z
+    ">
+  </svg></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-8.55px)rotateY(160deg) translateY(-2.72px)translateZ(23.49px) rotateX(13.22deg);width:17.1px;height:102.72px"
+    ><svg
+    style="transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)" width="171.01" height="1027.22"
+  >
+    <path fill="hsl(300, 100%, 13.9%)" d="
+      M0 0 M171.01 1027.22
+      M0 1027.22 H171.01
+      L128.26 513.61
+      H42.74999999999999 Z
+    ">
+  </svg></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-8.55px)rotateY(200deg) translateY(-2.72px)translateZ(23.49px) rotateX(13.22deg);width:17.1px;height:102.72px"
+    ><svg
+    style="transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)" width="171.01" height="1027.22"
+  >
+    <path fill="hsl(300, 100%, 13.9%)" d="
+      M0 0 M171.01 1027.22
+      M0 1027.22 H171.01
+      L128.26 513.61
+      H42.74999999999999 Z
+    ">
+  </svg></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-8.55px)rotateY(240deg) translateY(-2.72px)translateZ(23.49px) rotateX(13.22deg);width:17.1px;height:102.72px"
+    ><svg
+    style="transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)" width="171.01" height="1027.22"
+  >
+    <path fill="hsl(300, 100%, 16.7%)" d="
+      M0 0 M171.01 1027.22
+      M0 1027.22 H171.01
+      L128.26 513.61
+      H42.74999999999999 Z
+    ">
+  </svg></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-8.55px)rotateY(280deg) translateY(-2.72px)translateZ(23.49px) rotateX(13.22deg);width:17.1px;height:102.72px"
+    ><svg
+    style="transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)" width="171.01" height="1027.22"
+  >
+    <path fill="hsl(300, 100%, 19.5%)" d="
+      M0 0 M171.01 1027.22
+      M0 1027.22 H171.01
+      L128.26 513.61
+      H42.74999999999999 Z
+    ">
+  </svg></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-8.55px)rotateY(320deg) translateY(-2.72px)translateZ(23.49px) rotateX(13.22deg);width:17.1px;height:102.72px"
+    ><svg
+    style="transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)" width="171.01" height="1027.22"
+  >
+    <path fill="hsl(300, 100%, 22.3%)" d="
+      M0 0 M171.01 1027.22
+      M0 1027.22 H171.01
+      L128.26 513.61
+      H42.74999999999999 Z
+    ">
+  </svg></div><div 
+      style
+      ="transform:translateX(-25px)translateY(75px)rotateX(-90deg);height:50px"
+    ><svg width="500" height="500"
+    style="transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)"
+  >
+    <path fill="hsl(300, 100%, 12.5%)" d="
+      M0 0 M500 500
+      M335.51 15.08 L466.51 125 L496.2 293.41 L410.7 441.51 L250 500 L89.3 441.51 L3.8 293.41 L33.49 125 L164.49 15.08 Z
+    ">
+  </svg></div></div>
+  </div>
+  
+  <div 
+      role
+      ="group"
+     
+      data-name
+      ="pyramids"
+     
+      style
+      ="transform:translateZ(100px)"
+    >
+    <div 
+      role
+      ="shape"
+     
+      data-shape
+      ="pyramid"
+     
+      style
+      ="transform: translateY(-100px) translateX(-225px) ; "
+    ><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-21.65px) translateY(-0.78px)translateZ(12.5px) rotateX(7.13deg);width:43.3px;height:100.78px"
+    ><div 
+      style
+      ="width:0;height:0;border-style:solid;border-width:0 216.51px 1007.78px 216.51px;border-color:transparent transparent hsl(0, 100%, 50%) transparent;transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)"
+    ></div></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-21.65px)rotateY(120deg) translateY(-0.78px)translateZ(12.5px) rotateX(7.13deg);width:43.3px;height:100.78px"
+    ><div 
+      style
+      ="width:0;height:0;border-style:solid;border-width:0 216.51px 1007.78px 216.51px;border-color:transparent transparent hsl(0, 100%, 33.3%) transparent;transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)"
+    ></div></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-21.65px)rotateY(240deg) translateY(-0.78px)translateZ(12.5px) rotateX(7.13deg);width:43.3px;height:100.78px"
+    ><div 
+      style
+      ="width:0;height:0;border-style:solid;border-width:0 216.51px 1007.78px 216.51px;border-color:transparent transparent hsl(0, 100%, 33.3%) transparent;transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)"
+    ></div></div><div 
+      style
+      ="transform:translateX(-25px)translateY(75px)rotateX(-90deg);height:50px"
+    ><svg width="500" height="500"
+    style="transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)"
+  >
+    <path fill="hsl(0, 100%, 25%)" d="
+      M0 0 M500 500
+      M466.51 125 L250 500 L33.49 125 Z
+    ">
+  </svg></div></div>
+    <div 
+      role
+      ="shape"
+     
+      data-shape
+      ="pyramid"
+     
+      style
+      ="transform: translateY(-100px) translateX(-150px) ; "
+    ><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-17.68px) translateY(-1.55px)translateZ(17.68px) rotateX(10.02deg);width:35.36px;height:101.55px"
+    ><div 
+      style
+      ="width:0;height:0;border-style:solid;border-width:0 176.78px 1015.5px 176.78px;border-color:transparent transparent hsl(38.80000000000001, 100%, 50%) transparent;transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)"
+    ></div></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-17.68px)rotateY(90deg) translateY(-1.55px)translateZ(17.68px) rotateX(10.02deg);width:35.36px;height:101.55px"
+    ><div 
+      style
+      ="width:0;height:0;border-style:solid;border-width:0 176.78px 1015.5px 176.78px;border-color:transparent transparent hsl(38.80000000000001, 100%, 37.5%) transparent;transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)"
+    ></div></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-17.68px)rotateY(180deg) translateY(-1.55px)translateZ(17.68px) rotateX(10.02deg);width:35.36px;height:101.55px"
+    ><div 
+      style
+      ="width:0;height:0;border-style:solid;border-width:0 176.78px 1015.5px 176.78px;border-color:transparent transparent hsl(38.80000000000001, 100%, 25%) transparent;transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)"
+    ></div></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-17.68px)rotateY(270deg) translateY(-1.55px)translateZ(17.68px) rotateX(10.02deg);width:35.36px;height:101.55px"
+    ><div 
+      style
+      ="width:0;height:0;border-style:solid;border-width:0 176.78px 1015.5px 176.78px;border-color:transparent transparent hsl(38.80000000000001, 100%, 37.5%) transparent;transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)"
+    ></div></div><div 
+      style
+      ="transform:translateX(-25px)translateY(75px)rotateX(-90deg);height:50px"
+    ><svg width="500" height="500"
+    style="transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)"
+  >
+    <path fill="hsl(38.80000000000001, 100%, 25%)" d="
+      M0 0 M500 500
+      M426.78 73.22 L426.78 426.78 L73.22 426.78 L73.22 73.22 Z
+    ">
+  </svg></div></div>
+    <div 
+      role
+      ="shape"
+     
+      data-shape
+      ="pyramid"
+     
+      style
+      ="transform: translateY(-100px) translateX(-75px) ; "
+    ><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-14.69px) translateY(-2.02px)translateZ(20.23px) rotateX(11.43deg);width:29.39px;height:102.02px"
+    ><div 
+      style
+      ="width:0;height:0;border-style:solid;border-width:0 146.95px 1020.25px 146.95px;border-color:transparent transparent hsl(60, 100%, 50%) transparent;transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)"
+    ></div></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-14.69px)rotateY(72deg) translateY(-2.02px)translateZ(20.23px) rotateX(11.43deg);width:29.39px;height:102.02px"
+    ><div 
+      style
+      ="width:0;height:0;border-style:solid;border-width:0 146.95px 1020.25px 146.95px;border-color:transparent transparent hsl(60, 100%, 40%) transparent;transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)"
+    ></div></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-14.69px)rotateY(144deg) translateY(-2.02px)translateZ(20.23px) rotateX(11.43deg);width:29.39px;height:102.02px"
+    ><div 
+      style
+      ="width:0;height:0;border-style:solid;border-width:0 146.95px 1020.25px 146.95px;border-color:transparent transparent hsl(60, 100%, 30%) transparent;transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)"
+    ></div></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-14.69px)rotateY(216deg) translateY(-2.02px)translateZ(20.23px) rotateX(11.43deg);width:29.39px;height:102.02px"
+    ><div 
+      style
+      ="width:0;height:0;border-style:solid;border-width:0 146.95px 1020.25px 146.95px;border-color:transparent transparent hsl(60, 100%, 30%) transparent;transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)"
+    ></div></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-14.69px)rotateY(288deg) translateY(-2.02px)translateZ(20.23px) rotateX(11.43deg);width:29.39px;height:102.02px"
+    ><div 
+      style
+      ="width:0;height:0;border-style:solid;border-width:0 146.95px 1020.25px 146.95px;border-color:transparent transparent hsl(60, 100%, 40%) transparent;transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)"
+    ></div></div><div 
+      style
+      ="transform:translateX(-25px)translateY(75px)rotateX(-90deg);height:50px"
+    ><svg width="500" height="500"
+    style="transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)"
+  >
+    <path fill="hsl(60, 100%, 25%)" d="
+      M0 0 M500 500
+      M396.95 47.75 L487.76 327.25 L250 500 L12.24 327.25 L103.05 47.75 Z
+    ">
+  </svg></div></div>
+    <div 
+      role
+      ="shape"
+     
+      data-shape
+      ="pyramid"
+     
+      style
+      ="transform: translateY(-100px) translateX(0px) ; "
+    ><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-12.5px) translateY(-2.32px)translateZ(21.65px) rotateX(12.22deg);width:25px;height:102.32px"
+    ><div 
+      style
+      ="width:0;height:0;border-style:solid;border-width:0 125px 1023.17px 125px;border-color:transparent transparent hsl(120, 100%, 50%) transparent;transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)"
+    ></div></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-12.5px)rotateY(60deg) translateY(-2.32px)translateZ(21.65px) rotateX(12.22deg);width:25px;height:102.32px"
+    ><div 
+      style
+      ="width:0;height:0;border-style:solid;border-width:0 125px 1023.17px 125px;border-color:transparent transparent hsl(120, 100%, 41.7%) transparent;transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)"
+    ></div></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-12.5px)rotateY(120deg) translateY(-2.32px)translateZ(21.65px) rotateX(12.22deg);width:25px;height:102.32px"
+    ><div 
+      style
+      ="width:0;height:0;border-style:solid;border-width:0 125px 1023.17px 125px;border-color:transparent transparent hsl(120, 100%, 33.3%) transparent;transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)"
+    ></div></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-12.5px)rotateY(180deg) translateY(-2.32px)translateZ(21.65px) rotateX(12.22deg);width:25px;height:102.32px"
+    ><div 
+      style
+      ="width:0;height:0;border-style:solid;border-width:0 125px 1023.17px 125px;border-color:transparent transparent hsl(120, 100%, 25%) transparent;transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)"
+    ></div></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-12.5px)rotateY(240deg) translateY(-2.32px)translateZ(21.65px) rotateX(12.22deg);width:25px;height:102.32px"
+    ><div 
+      style
+      ="width:0;height:0;border-style:solid;border-width:0 125px 1023.17px 125px;border-color:transparent transparent hsl(120, 100%, 33.3%) transparent;transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)"
+    ></div></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-12.5px)rotateY(300deg) translateY(-2.32px)translateZ(21.65px) rotateX(12.22deg);width:25px;height:102.32px"
+    ><div 
+      style
+      ="width:0;height:0;border-style:solid;border-width:0 125px 1023.17px 125px;border-color:transparent transparent hsl(120, 100%, 41.7%) transparent;transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)"
+    ></div></div><div 
+      style
+      ="transform:translateX(-25px)translateY(75px)rotateX(-90deg);height:50px"
+    ><svg width="500" height="500"
+    style="transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)"
+  >
+    <path fill="hsl(120, 100%, 25%)" d="
+      M0 0 M500 500
+      M375 33.49 L500 250 L375 466.51 L125 466.51 L0 250 L125 33.49 Z
+    ">
+  </svg></div></div>
+    <div 
+      role
+      ="shape"
+     
+      data-shape
+      ="pyramid"
+     
+      style
+      ="transform: translateY(-100px) translateX(75px) ; "
+    ><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-10.85px) translateY(-2.51px)translateZ(22.52px) rotateX(12.69deg);width:21.69px;height:102.51px"
+    ><div 
+      style
+      ="width:0;height:0;border-style:solid;border-width:0 108.47px 1025.05px 108.47px;border-color:transparent transparent hsl(120, 100%, 25.1%) transparent;transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)"
+    ></div></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-10.85px)rotateY(51.43deg) translateY(-2.51px)translateZ(22.52px) rotateX(12.69deg);width:21.69px;height:102.51px"
+    ><div 
+      style
+      ="width:0;height:0;border-style:solid;border-width:0 108.47px 1025.05px 108.47px;border-color:transparent transparent hsl(120, 100%, 21.5%) transparent;transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)"
+    ></div></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-10.85px)rotateY(102.86deg) translateY(-2.51px)translateZ(22.52px) rotateX(12.69deg);width:21.69px;height:102.51px"
+    ><div 
+      style
+      ="width:0;height:0;border-style:solid;border-width:0 108.47px 1025.05px 108.47px;border-color:transparent transparent hsl(120, 100%, 17.9%) transparent;transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)"
+    ></div></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-10.85px)rotateY(154.29deg) translateY(-2.51px)translateZ(22.52px) rotateX(12.69deg);width:21.69px;height:102.51px"
+    ><div 
+      style
+      ="width:0;height:0;border-style:solid;border-width:0 108.47px 1025.05px 108.47px;border-color:transparent transparent hsl(120, 100%, 14.3%) transparent;transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)"
+    ></div></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-10.85px)rotateY(205.71deg) translateY(-2.51px)translateZ(22.52px) rotateX(12.69deg);width:21.69px;height:102.51px"
+    ><div 
+      style
+      ="width:0;height:0;border-style:solid;border-width:0 108.47px 1025.05px 108.47px;border-color:transparent transparent hsl(120, 100%, 14.3%) transparent;transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)"
+    ></div></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-10.85px)rotateY(257.14deg) translateY(-2.51px)translateZ(22.52px) rotateX(12.69deg);width:21.69px;height:102.51px"
+    ><div 
+      style
+      ="width:0;height:0;border-style:solid;border-width:0 108.47px 1025.05px 108.47px;border-color:transparent transparent hsl(120, 100%, 17.9%) transparent;transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)"
+    ></div></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-10.85px)rotateY(308.57deg) translateY(-2.51px)translateZ(22.52px) rotateX(12.69deg);width:21.69px;height:102.51px"
+    ><div 
+      style
+      ="width:0;height:0;border-style:solid;border-width:0 108.47px 1025.05px 108.47px;border-color:transparent transparent hsl(120, 100%, 21.5%) transparent;transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)"
+    ></div></div><div 
+      style
+      ="transform:translateX(-25px)translateY(75px)rotateX(-90deg);height:50px"
+    ><svg width="500" height="500"
+    style="transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)"
+  >
+    <path fill="hsl(120, 100%, 12.5%)" d="
+      M0 0 M500 500
+      M358.47 24.76 L493.73 194.37 L445.46 405.87 L250 500 L54.54 405.87 L6.27 194.37 L141.53 24.76 Z
+    ">
+  </svg></div></div>
+    <div 
+      role
+      ="shape"
+     
+      data-shape
+      ="pyramid"
+     
+      style
+      ="transform: translateY(-100px) translateX(150px) ; "
+    ><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-9.57px) translateY(-2.63px)translateZ(23.1px) rotateX(13.01deg);width:19.13px;height:102.63px"
+    ><div 
+      style
+      ="width:0;height:0;border-style:solid;border-width:0 95.67px 1026.33px 95.67px;border-color:transparent transparent hsl(240, 100%, 50%) transparent;transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)"
+    ></div></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-9.57px)rotateY(45deg) translateY(-2.63px)translateZ(23.1px) rotateX(13.01deg);width:19.13px;height:102.63px"
+    ><div 
+      style
+      ="width:0;height:0;border-style:solid;border-width:0 95.67px 1026.33px 95.67px;border-color:transparent transparent hsl(240, 100%, 43.8%) transparent;transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)"
+    ></div></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-9.57px)rotateY(90deg) translateY(-2.63px)translateZ(23.1px) rotateX(13.01deg);width:19.13px;height:102.63px"
+    ><div 
+      style
+      ="width:0;height:0;border-style:solid;border-width:0 95.67px 1026.33px 95.67px;border-color:transparent transparent hsl(240, 100%, 37.5%) transparent;transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)"
+    ></div></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-9.57px)rotateY(135deg) translateY(-2.63px)translateZ(23.1px) rotateX(13.01deg);width:19.13px;height:102.63px"
+    ><div 
+      style
+      ="width:0;height:0;border-style:solid;border-width:0 95.67px 1026.33px 95.67px;border-color:transparent transparent hsl(240, 100%, 31.3%) transparent;transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)"
+    ></div></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-9.57px)rotateY(180deg) translateY(-2.63px)translateZ(23.1px) rotateX(13.01deg);width:19.13px;height:102.63px"
+    ><div 
+      style
+      ="width:0;height:0;border-style:solid;border-width:0 95.67px 1026.33px 95.67px;border-color:transparent transparent hsl(240, 100%, 25%) transparent;transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)"
+    ></div></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-9.57px)rotateY(225deg) translateY(-2.63px)translateZ(23.1px) rotateX(13.01deg);width:19.13px;height:102.63px"
+    ><div 
+      style
+      ="width:0;height:0;border-style:solid;border-width:0 95.67px 1026.33px 95.67px;border-color:transparent transparent hsl(240, 100%, 31.3%) transparent;transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)"
+    ></div></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-9.57px)rotateY(270deg) translateY(-2.63px)translateZ(23.1px) rotateX(13.01deg);width:19.13px;height:102.63px"
+    ><div 
+      style
+      ="width:0;height:0;border-style:solid;border-width:0 95.67px 1026.33px 95.67px;border-color:transparent transparent hsl(240, 100%, 37.5%) transparent;transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)"
+    ></div></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-9.57px)rotateY(315deg) translateY(-2.63px)translateZ(23.1px) rotateX(13.01deg);width:19.13px;height:102.63px"
+    ><div 
+      style
+      ="width:0;height:0;border-style:solid;border-width:0 95.67px 1026.33px 95.67px;border-color:transparent transparent hsl(240, 100%, 43.8%) transparent;transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)"
+    ></div></div><div 
+      style
+      ="transform:translateX(-25px)translateY(75px)rotateX(-90deg);height:50px"
+    ><svg width="500" height="500"
+    style="transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)"
+  >
+    <path fill="hsl(240, 100%, 25%)" d="
+      M0 0 M500 500
+      M345.67 19.03 L480.97 154.33 L480.97 345.67 L345.67 480.97 L154.33 480.97 L19.03 345.67 L19.03 154.33 L154.33 19.03 Z
+    ">
+  </svg></div></div>
+    <div 
+      role
+      ="shape"
+     
+      data-shape
+      ="pyramid"
+     
+      style
+      ="transform: translateY(-100px) translateX(225px) ; "
+    ><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-8.55px) translateY(-2.72px)translateZ(23.49px) rotateX(13.22deg);width:17.1px;height:102.72px"
+    ><div 
+      style
+      ="width:0;height:0;border-style:solid;border-width:0 85.51px 1027.22px 85.51px;border-color:transparent transparent hsl(300, 100%, 25.1%) transparent;transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)"
+    ></div></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-8.55px)rotateY(40deg) translateY(-2.72px)translateZ(23.49px) rotateX(13.22deg);width:17.1px;height:102.72px"
+    ><div 
+      style
+      ="width:0;height:0;border-style:solid;border-width:0 85.51px 1027.22px 85.51px;border-color:transparent transparent hsl(300, 100%, 22.3%) transparent;transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)"
+    ></div></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-8.55px)rotateY(80deg) translateY(-2.72px)translateZ(23.49px) rotateX(13.22deg);width:17.1px;height:102.72px"
+    ><div 
+      style
+      ="width:0;height:0;border-style:solid;border-width:0 85.51px 1027.22px 85.51px;border-color:transparent transparent hsl(300, 100%, 19.5%) transparent;transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)"
+    ></div></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-8.55px)rotateY(120deg) translateY(-2.72px)translateZ(23.49px) rotateX(13.22deg);width:17.1px;height:102.72px"
+    ><div 
+      style
+      ="width:0;height:0;border-style:solid;border-width:0 85.51px 1027.22px 85.51px;border-color:transparent transparent hsl(300, 100%, 16.7%) transparent;transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)"
+    ></div></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-8.55px)rotateY(160deg) translateY(-2.72px)translateZ(23.49px) rotateX(13.22deg);width:17.1px;height:102.72px"
+    ><div 
+      style
+      ="width:0;height:0;border-style:solid;border-width:0 85.51px 1027.22px 85.51px;border-color:transparent transparent hsl(300, 100%, 13.9%) transparent;transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)"
+    ></div></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-8.55px)rotateY(200deg) translateY(-2.72px)translateZ(23.49px) rotateX(13.22deg);width:17.1px;height:102.72px"
+    ><div 
+      style
+      ="width:0;height:0;border-style:solid;border-width:0 85.51px 1027.22px 85.51px;border-color:transparent transparent hsl(300, 100%, 13.9%) transparent;transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)"
+    ></div></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-8.55px)rotateY(240deg) translateY(-2.72px)translateZ(23.49px) rotateX(13.22deg);width:17.1px;height:102.72px"
+    ><div 
+      style
+      ="width:0;height:0;border-style:solid;border-width:0 85.51px 1027.22px 85.51px;border-color:transparent transparent hsl(300, 100%, 16.7%) transparent;transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)"
+    ></div></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-8.55px)rotateY(280deg) translateY(-2.72px)translateZ(23.49px) rotateX(13.22deg);width:17.1px;height:102.72px"
+    ><div 
+      style
+      ="width:0;height:0;border-style:solid;border-width:0 85.51px 1027.22px 85.51px;border-color:transparent transparent hsl(300, 100%, 19.5%) transparent;transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)"
+    ></div></div><div 
+      style
+      ="transform-origin:50% 100%;transform:translateX(-8.55px)rotateY(320deg) translateY(-2.72px)translateZ(23.49px) rotateX(13.22deg);width:17.1px;height:102.72px"
+    ><div 
+      style
+      ="width:0;height:0;border-style:solid;border-width:0 85.51px 1027.22px 85.51px;border-color:transparent transparent hsl(300, 100%, 22.3%) transparent;transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)"
+    ></div></div><div 
+      style
+      ="transform:translateX(-25px)translateY(75px)rotateX(-90deg);height:50px"
+    ><svg width="500" height="500"
+    style="transform-origin:0 0;transform:scale3d(0.1,0.1,0.1)"
+  >
+    <path fill="hsl(300, 100%, 12.5%)" d="
+      M0 0 M500 500
+      M335.51 15.08 L466.51 125 L496.2 293.41 L410.7 441.51 L250 500 L89.3 441.51 L3.8 293.41 L33.49 125 L164.49 15.08 Z
+    ">
+  </svg></div></div>
+  </div>
+  
+</div>

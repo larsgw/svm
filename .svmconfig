@@ -1,2 +1,4 @@
-cube.svm html cube.html
-pyramid.svm html pyramid.html
+#cube.svm html cube.html
+#pyramid.svm html pyramid.html
+#frustum.svm html frustum.html
+path.svm html svg.html
