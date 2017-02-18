@@ -6,6 +6,7 @@
   
   <group name="curves">
     <curve path="M0 0 h200 v100 H-50 Z M0 200 h50 v50 Z" height="150" color="red" />
+    <concave color="lime" x="-400" height="150" path="M30 160h50v-20H30v20zm65 00h50v-20h-50v20zm65 00h50v-20h-50v20zM30 200h20v-20H30v20zm40 00h20v-20H70v20zm40 00h20v-20h-20v20zm40 00h20v-20h-20v20zm40 00h20v-20h-20v20zM30 120h80v-20H30v20zm100 00h80v-20h-80v20zM30 40v40h180V40H30z"/>
   </group>
   
 </svm>

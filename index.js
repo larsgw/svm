@@ -26,6 +26,7 @@ const parseElement = function (elm) {
       case 'SPHERE':
       case 'PYRAMID':
       case 'FRUSTUM':
+      case 'CONCAVE':
         return shape(u(elm.name), elm.attr)
         break
       

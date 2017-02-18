@@ -4,7 +4,7 @@ var adminAccount = {
   slideshowdata:[
     {
       title:'test',
-      sta:1,
+      sta:5,
       style:'dev2',
       load:'puzzle',
       type:'puzzle',
@@ -14,9 +14,11 @@ var adminAccount = {
         
         {pos:{z:'200px',ry:-45,rx:45},kind:'none',type:'none'},
         {pos:{z:'300px',ry:-45,rx:45},kind:'none',type:'none'},
+        
+        {pos:{x:'-400px'},kind:'none',type:'none'},
 	
-//         {pos:{z:'0'},contenturl:'../cube.html',kind:'html',type:'html'},
-//         {pos:{z:'200px'},contenturl:'../pyramid.html',kind:'html',type:'html'}
+        {pos:{z:'0'},contenturl:'../cube.html',kind:'html',type:'html'},
+        {pos:{z:'200px'},contenturl:'../pyramid.html',kind:'html',type:'html'},
         
         {pos:{z:'0'},contenturl:'../svg.html',kind:'html',type:'html'}
       ]
