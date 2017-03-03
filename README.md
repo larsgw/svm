@@ -1,19 +1,19 @@
 # SVM
 
-SVM is an SVG-like XML-based 3d model format, meant for conversion to HTML+CSS3D models, and, in the future, WebGL.
+SVM is an SVG-like XML-based 3D model format, meant for conversion to HTML+CSS3D models, and, in the future, WebGL.
 
 The first version is still in development. Here are the current features:
 
 * Solids:
   * cubes
-  * spheres (not optimised yet)
-  * regular prisms and cylinder approximations (max 12 sides, configurable)
-  * regular pyramids and cone approximations (max 12 sides, configurable)
-  * regular, right [frustums](https://en.wikipedia.org/wiki/Frustum) (max 12 sides, configurable)
-  * irregular concave and convex prisms (based on SVG paths, in progress)
+  * spheres
+  * regular prisms and cylinder approximations (max 20 sides, max configurable)
+  * regular pyramids and cone approximations (max 20 sides, max configurable)
+  * regular, right [frustums](https://en.wikipedia.org/wiki/Frustum) (max 20 sides, max configurable)
+  * irregular concave and convex prisms (based on SVG paths)
 * Planes:
   * rectangles
-  * curves (based on SVG paths, in progress)
+  * curves (based on SVG paths)
 * Other:
   * Groups with names
 * Transformation for each shape, plane or group
@@ -22,13 +22,14 @@ The webviewer (only HTML+CSS3D) has it's flaws:
 
 * The code is messy. This will be fixed after at least all the above features are done
 * It only works in certain browsers
-* Chrome has graphical issues around 400-500 element faces (not elements)
 
 ## Get started
 As I said, the first version (not `v1.0` but `v0.1`) is still in development. Documentation will be provided later. For now, I suggest looking at the example input (`*.svm`). The webviewer mentioned above is `/presents/?s=adminAccount&p=test`. Camera's and displayed models can be controlled in `/presents/js/adminaccount.js` (again, hardly readable).
 
 ### Transformations
 For camera's and including models, the following transformation options are available:
+
+Disclaimer: will change in the future
 
 * `x`, `y`, `z` for coordinates (left top)
 * `rz`, `rx`, `ry` for rotation across corresponding axes, in this order
@@ -41,7 +42,6 @@ For elements in SVM, the following options are available:
 * `scale`, `scaleX`, `scaleY`, `scaleZ` for corresponding scale operations. You can't use any of the axis-specific operations together with the general one (I swear that seemed reasonable at the time)
 
 ### Webviewer controls
-
 Disclaimer: will change in the future
 
 * Drag with mouse: rotate static Y and dynamic X axis
@@ -53,8 +53,7 @@ Disclaimer: will change in the future
 * 2: Show layer toggle menu
 * 3: Re-align bottom camera menu (almost never necessary)
 
-In the console, there's a short "performance report". If `Total` is above ~450 
-elements, things may get weird.
+In the console, there's a short "performance report". If `Total` is above ~450 elements, things may get weird, but that really depends on the computer and browser.
 
 ### Updating compiled models
 First, install all node dependencies:
@@ -71,6 +70,12 @@ Structure per line is:
 
 ## FAQ
 
+### My model isn't compiling. What's the problem?
+I don't know. For support, [submit an issue](https://github.com/larsgw/svm/issues/new) with relevant details (e.g. `*.svm` file, error message, Node.js version). 
+
+### My model compiles, but doesn't work. What's the problem?
+Probably your browser. Again the webviewer isn't perfect, but the main problem is probably your browser not supporting the CSS (likely) or an error in the JS (possible). It really depends on the type of problem you're having. Please [submit an issue](https://github.com/larsgw/svm/issues/new) with relevant details (e.g. browser version, problem, screenshots, error messages).
+
 ### Why not use [A-Frame](https://aframe.io/), [xml3d](http://xml3d.org/), etc.?
 Those use WebGL, and my main goal is using HTML+CSS3D. This has advantages, like viewing element hierarchy and CSS in common debug environments, selecting text, embedding video's and pages, and not having to learn how to use WebGL.
 
@@ -78,3 +83,11 @@ Those use WebGL, and my main goal is using HTML+CSS3D. This has advantages, like
 Too complicated, ugh.
 
 Longer answer: Now I control the features I need to implement. It's not supposed to be some sort of standard, it's basically a replacement for having to type actual HTML+CSS3D models, which can be cool, but aren't really compatible, and a pain to make by hand.
+
+### What does SVM mean?
+Scalable Vector (3D) Models. It says so in the description.
+
+### And that other thing called SVM?
+Don't worry about it.
+
+Or, to make a bad pun: I don't give a faq.
