@@ -37,20 +37,36 @@ var toggle3d = function (a) {
         h = $('<form><p><b>'+k+'</b></p></form>').appendTo('#toggle-bar')
     
     v[k] = {
-      elm: $b.find('div, svg').length,
+      group: $b.find('div[role=group]').length,
+      shape: $b.find('> div[role=shape], div[role=group] > div[role=shape]').length,
+      plane: $b.find('> div[role=plane], div[role=group] > div[role=plane]').length,
+      curve: $b.find('> div[role=plane-curve], div[role=group] > div[role=plane-curve]').length,
+      
       div: $b.find('div').length,
-      path: $b.find('svg').length
+      path: $b.find('svg').length,
+      elm: $b.find('div, svg').length
     }
     
     h.append('<ul>' + t($b, [k]) + '</ul>')
   })
   
-  var tot = 0
+  var tot = $('.slide.html *').length,
+      com = 0
+  
   var msg = Object.keys(v).map(function (k) {
     var o = v[k],
-        h = k + '\n\tTotal: ' + o.elm + '\n\tDiv: ' + o.div + '\n\tSVG: ' + o.path
+        h = k +
+    '\n\tGroup: ' + o.group +
+    '\n\tShape: ' + o.shape +
+    '\n\tPlane: ' + o.plane +
+    '\n\tCurve: ' + o.curve +
+    '\n' +
+    '\n\tDiv: ' + o.div +
+    '\n\tSVG: ' + o.path +
+    '\n\tTotal: ' + o.elm +
+    '\n'
       
-    tot += o.elm
+    com += o.elm
     
     return h
   }).join('\n')
@@ -64,19 +80,21 @@ var toggle3d = function (a) {
     tot < 300 ? 'gold' :
     tot < 350 ? 'orange' :
     tot < 400 ? 'darkorange' :
-    tot < 
     'red'
   
+  var count = tot < 400 ? tot / 16 : 25
+  
   console.log(
-    '%cSVM Render report' + '\n\n' +
-    '%cTotal: ' + tot + '\n\n' +
-    '%c' + ' '.repeat(tot/16) + '%c' + ' '.repeat(25-tot/16) + '%c'
-    + '\n\n' + msg,
-    'background:black;color:white;',
-    'background:transparent;color:rgb(48, 57, 66);',
-    'background:' + color + ';',
-    'background:#ccc;',
-    'background:transparent'
+    '%cSVM Render report' +
+    '%c\n\nTotal: ' + tot + '\n\n' +
+    '%c' + ' '.repeat(count) + '%c' + ' '.repeat(25 - count) +
+    '%c\n\nCombined: ' + com + '\n\n' +
+     msg,
+    'background-color:black;color:white;',
+    '',
+    'background-color:' + color + ';',
+    'background-color:#ccc;',
+    ''
   )
 
   $('input.layer').unbind('change').change(function(){

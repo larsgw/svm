@@ -1,0 +1,63 @@
+const q = v => Math.pow(v,2)
+
+const calculateCenter = function ([rx, ry], rot, [xB, yB], [xA, yA]) {
+  const dx = xB - xA,
+        dy = yB - yA
+  
+  const R  = ry / rx,
+        dx2= dx * R,
+        a  = Math.atan2(dx2, dy) + (Math.PI / 2),
+        d  = Math.sqrt(q(dx2) + q(dy)),
+        d2 = Math.sqrt(q(ry) - q(d / 2))
+  
+  const xM = ( (xA + R * xB) / 2 + Math.cos(a) * d2) / R
+        yM = ( (yA +     yB) / 2 + Math.sin(a) * d2) / R
+  
+  return [xM, yM]
+}
+
+const tests = [
+  [[4, 2], 0, [3, 2], [0, 1]],
+  [[4, 2], 0, [0, 1], [3, 2]],
+//   [[4, 2], 0, [3, 2], [0, 1]],
+//   [[4, 2], 0, [3, 2], [0, 1]]
+]
+
+const colors = [
+  ['red', 'black'],
+  ['blue', 'green'],
+  ['orange', 'purple']
+]
+
+const f = 100
+
+$(()=>{
+
+  const $body = $('body')
+
+  tests.forEach(([[rx, ry], rot, [xB, yB], [xA, yA]], i) => {
+    rx*=f,ry*=f,xA*=f,yA*=f,xB*=f,yB*=f
+    
+    const [xM, yM] = calculateCenter([rx, ry], rot, [xB, yB], [xA, yA]),
+          [c1, c2] = colors[i % colors.length]
+    
+    $body.append(`
+    <svg height="800" viewBox="0 0 800 800" width="800">
+      <g style="transform:translate(400px,400px)">
+        
+        <ellipse fill="transparent" stroke="${c1}"
+          cx="${xM}" cy="${yM}"
+          rx="${rx}" ry="${ry}"/>
+        
+        <path fill="transparent" stroke="${c2}" d="
+          M${xA} ${yA}
+          A${rx} ${ry},${rot},0,0,${xB} ${yB}
+        "></path>
+        
+      </g>
+      
+    </svg>
+    `)//
+  })
+
+})

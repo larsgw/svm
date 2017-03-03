@@ -30,4 +30,14 @@
     <cube x="225" width="50" depth="50" height="50" color="purple" />
   </group>
   
+  <group z="300" name="frustums">
+    <frustum x="-225" cap-height="50" radius="25" height="100" sides="3" color="red" />
+    <frustum x="-150" cap-height="50" radius="25" height="100" sides="4" color="orange" />
+    <frustum x="-75" cap-height="50" radius="25" height="100" sides="5" color="yellow" />
+    <frustum x="0" cap-height="50" radius="25" height="100" sides="6" color="lime" />
+    <frustum x="75" cap-height="50" radius="25" height="100" sides="7" color="green" />
+    <frustum x="150" cap-height="50" radius="25" height="100" sides="8" color="blue" />
+    <frustum x="225" cap-height="50" radius="25" height="100" sides="9" color="purple" />
+  </group>
+  
 </svm>

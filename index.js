@@ -9,7 +9,7 @@ const fs = require('fs'),
 
 global.opt = {}
 global.opt.maxZoom = 10
-global.opt.maxSides = 12
+global.opt.maxSides = 20
 global.opt.maxShadow = .5
 
 const {shape} = require('./lib/shapes'),
@@ -28,14 +28,11 @@ const parseElement = function (elm) {
       case 'FRUSTUM':
       case 'CONCAVE':
         return shape(u(elm.name), elm.attr)
-        break
       
       case 'PLANE':
         return plane(elm.attr)
-        break
       case 'CURVE':
         return curve(elm.attr)
-        break
       
       case 'GROUP':
         return div(
@@ -48,15 +45,13 @@ const parseElement = function (elm) {
           },
           elm.children.map(parseElement).join('')
         )
-        break
       
       case 'SVM':
         return div({role: 'root', 'data-name': elm.attr.name}, elm.children.map(parseElement).join``)
-        break
       
       default:
+        console.warn(`Invalid element name, skipped: ${u(elm.name)}`)
         return elm.children.map(parseElement).join('')
-        break
     }
   } else {
     return elm.text

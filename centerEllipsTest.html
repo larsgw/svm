@@ -1,0 +1,24 @@
+<style>
+svg{position:absolute}
+</style>
+
+
+<svg height="800" viewBox="0 0 800 800" width="800">
+  <defs> 
+    <pattern id="grid10" width="50" height="50" patternUnits="userSpaceOnUse">
+      <path d="M 100 0 L 0 0 0 100" fill="none" stroke="black" opacity=".35" stroke-width="1"/>
+    </pattern>
+    <pattern id="grid20" width="25" height="25" patternUnits="userSpaceOnUse">
+      <path d="M 100 0 L 0 0 0 100" fill="none" stroke="black" opacity=".25" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect fill="url(#grid20)" height="1000" width="1000" y="-50" x="-50"></rect>
+  <rect fill="url(#grid10)" height="1000" width="1000" y="-50" x="-50"></rect>
+  
+  <circle r="2" cx="400" cy="400" fill="grey" />
+  <text x="385" y="415" fill="grey">O</text>
+</svg>
+
+
+<script type="text/javascript" src="presents/js/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="centerEllipsTest.js"></script>
