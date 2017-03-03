@@ -4,7 +4,7 @@ var adminAccount = {
   slideshowdata:[
     {
       title:'test',
-      sta: 6,
+      sta: 5,
       style:'dev2',
       load:'puzzle',
       type:'puzzle',
