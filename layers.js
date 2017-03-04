@@ -1,11 +1,11 @@
 var toggle3d = function (a) {
-  var f = a.find('div[role="root"][data-name]')
-  
-  var v = {}
+  var f = a.find('div[role="root"][data-name]'),
+      v = {}
   
   var u = function (s) {
     return '[data-name=\'' + s + '\']'
   }
+  
   var t = function (c, k) {
     var o = ''
     
@@ -32,7 +32,7 @@ var toggle3d = function (a) {
   }
   
   f.each(function (_, b) {
-    var $b= $(b)
+    var $b= $(b),
         k = $b.data('name') || 'unnamed',
         h = $('<form><p><b>'+k+'</b></p></form>').appendTo('#toggle-bar')
     
@@ -50,7 +50,7 @@ var toggle3d = function (a) {
     h.append('<ul>' + t($b, [k]) + '</ul>')
   })
   
-  var tot = $('.slide.html *').length,
+  var tot = $('.svm-model *').length,
       com = 0
   
   var msg = Object.keys(v).map(function (k) {
@@ -99,6 +99,6 @@ var toggle3d = function (a) {
 
   $('input.layer').unbind('change').change(function(){
     var j = $(this).val()
-    $('#V .slider .slide.html').find(j).toggle()
+    $('.svm-frame > div > div > .svm-model').find(j).toggle()
   })
 }

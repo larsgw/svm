@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+  </head>
+  
+  <body>
+    
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.2.min.js"></script>
+    <script type="text/javascript" src="presents/js/jquery.transit.js"></script>
+    <script type="text/javascript" src="presents/js/mousewheel.js"></script>
+    <script type="text/javascript" src="js/jgestures.min.js"></script>
+    <script type="text/javascript" src="webviewer.js"></script>
+    
+    <!-- 3d editor -->
+    <style>
+    #toggle-bar { background:rgba(0,0,0,.5);position:fixed;padding:5px;color:white; }
+    #toggle-bar { right:10px;top:10px;z-index:10000; }
+    #toggle-bar form:not(:first-child) { margin-top:15px; }
+    #toggle-bar form fieldset { margin:0;padding:0;border:0; }
+    #toggle-bar form fieldset > * { vertical-align:middle;margin:0; }
+    #toggle-bar form fieldset label { font-weight:normal;padding-left:5px; }
+    #toggle-bar form p {margin:0 0 10px}
+    #toggle-bar form p::first-letter {text-transform:uppercase}
+    #toggle-bar form ul {padding:0;margin:0;list-style-type:none}
+    #toggle-bar form ul ul {padding-left:20px;}
+    </style>
+    <div id="toggle-bar"></div>
+    <script type="text/javascript" src="layers.js"></script>
+  </body>
+</html>
