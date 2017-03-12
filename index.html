@@ -1,33 +1,155 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-    <link rel="stylesheet" type="text/css" href="style.css"/>
-  </head>
-  
-  <body>
-    
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.2.min.js"></script>
-    <script type="text/javascript" src="presents/js/jquery.transit.js"></script>
-    <script type="text/javascript" src="presents/js/mousewheel.js"></script>
-    <script type="text/javascript" src="js/jquery.mobile.custom.min.js"></script>
-    <script type="text/javascript" src="webviewer.js"></script>
-    
-    <!-- 3d editor -->
+    <title>SVM</title>
+    <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&subset=latin,greek,latin-ext' rel='stylesheet' type='text/css'>
     <style>
-    .as-console-wrapper {z-index:10000} /*TEST*/
-    
-    #toggle-bar { background:rgba(0,0,0,.5);position:fixed;padding:5px;color:white; }
-    #toggle-bar { right:10px;top:10px;z-index:10000; }
-    #toggle-bar form:not(:first-child) { margin-top:15px; }
-    #toggle-bar form fieldset { margin:0;padding:0;border:0; }
-    #toggle-bar form fieldset > * { vertical-align:middle;margin:0; }
-    #toggle-bar form fieldset label { font-weight:normal;padding-left:5px; }
-    #toggle-bar form p {margin:0 0 10px}
-    #toggle-bar form p::first-letter {text-transform:uppercase}
-    #toggle-bar form ul {padding:0;margin:0;list-style-type:none}
-    #toggle-bar form ul ul {padding-left:20px;}
+html {font-family: 'Roboto';color: rgba(0,0,0,.87);}
+body {max-width: 750px;margin: 0 auto}
     </style>
-    <div id="toggle-bar"></div>
-    <script type="text/javascript" src="layers.js"></script>
+  </head>
+  <body>
+    <header>
+<article>
+<h1>SVM</h1>
+
+<strong><p>This page is currently identical (except for this note) to the README; actual site will follow. <a href="https://larsgw.github.io/svm/demo.html">Demo</a></p></strong>
+
+<p>SVM is an SVG-like XML-based 3D model format, meant for conversion to HTML+CSS3D models, and, in the
+future, WebGL.</p>
+
+<p>The first version is still in development. Here are the current features:</p>
+
+<ul>
+  <li>Solids:
+    <ul>
+      <li>cubes</li>
+      <li>spheres</li>
+      <li>regular prisms and cylinder approximations (max 20 sides, max configurable)</li>
+      <li>regular pyramids and cone approximations (max 20 sides, max configurable)</li>
+      <li>regular, right <a href="https://en.wikipedia.org/wiki/Frustum">frustums</a> (max 20 sides, max configurable)</li>
+      <li>irregular concave and convex prisms (based on SVG paths)</li>
+    </ul>
+  </li>
+  
+  <li>Planes:
+    <ul>
+      <li>rectangles</li>
+      <li>curves (based on SVG paths)</li>
+    </ul>
+  </li>
+  
+  <li>Other:
+    <ul>
+      <li>groups with names</li>
+    </ul>
+  </li>
+  <li>Transformation for each shape, plane or group</li>
+</ul>
+
+<p>To view a compiled file, use the webviewer (only for HTML+CSS3D). <strong>Note: It only works in modern browsers.</strong></p>
+
+<h2>Getting started</h2>
+
+<p>As I said, the first version (not <code>v1.0</code> but <code>v0.1</code>) is still in development.
+Documentation will be provided later. For now, I suggest looking at the example input (<code>*.svm</code>).
+The webviewer mentioned above is <a href="https://larsgw.github.io/svm/demo.html"><code>demo.html</code></a>.
+Camera's and displayed models can be controlled in <code>svm-example.json</code>.</p>
+
+<h3>Transformations</h3>
+
+<p>For camera's and including models, the following transformation options are available:</p>
+
+<p>Disclaimer: will change in the future</p>
+
+<ul>
+  <li><code>x</code>, <code>y</code>, <code>z</code> for coordinates (left top)</li>
+  <li><code>rz</code>, <code>rx</code>, <code>ry</code> for rotation across corresponding axes, in this order</li>
+  <li><code>sc</code> for scale</li>
+</ul>
+
+<p>For elements in SVM, the following options are available:</p>
+
+<ul>
+  <li><code>x</code>, <code>y</code>, <code>z</code> for coordinates (usually middle bottom)</li>
+  <li><code>rz</code>, <code>rx</code>, <code>ry</code> for rotation across corresponding axes, in this order</li>
+  <li><code>scale</code>, <code>scaleX</code>, <code>scaleY</code>, <code>scaleZ</code> for corresponding scale operations. You can't use any of the axis-specific operations together with the general one (I swear that seemed reasonable at the time)</li>
+</ul>
+
+<h3>Webviewer controls</h3>
+
+<p>Disclaimer: will change in the future</p>
+
+<ul>
+  <li>Drag with mouse: rotate static Y and dynamic X axis</li>
+  <li>Scroll: zoom; TG: zoom</li>
+  <li>WASD: move X and Z axis; RF: move Y axis</li>
+  <li>IJKL: rotate static Y and dynamic X axis; ZX: rotate Z axis</li>
+  <li>Q: move back to last camera</li>
+  <li>Arrow keys: change camera</li>
+</ul>
+
+<p>In the console, there's a short "performance report". If <code>Total</code> is above ~450 elements, things may get weird, but that really depends on the computer and browser.</p>
+
+<h3>Updating compiled models</h3>
+
+<p>First, install all node dependencies:</p>
+
+<pre><code>node install
+</code></pre>
+
+<p>Output is updated with:
+
+<pre><code>node install
+</code></pre>
+
+<p>The compiling process is controlled in <code>.svmconfig</code>. Structure per line is:</p>
+
+<ul>
+  <li>Optional <code>#</code>: comments out line</li>
+  <li>Input file: <code>*.svm</code></li>
+  <li>Method: Currently only <code>html</code></li>
+  <li>Output file: <code>*.html</code></li>
+</ul>
+
+<h2>Examples</h2>
+
+<ul>
+  <li><a href="https://github.com/larsgw/svm/tree/master/svm">Example SVM files</a></li>
+  <li><a href="https://github.com/larsgw/svm/tree/master/svm-example.json">WebViewer source example</a></li>
+  <li><a href="https://larsgw.github.io/svm/demo.html">WebViewer live example</a></li>
+</ul>
+
+<h2>FAQ</h2>
+
+<h3>My model isn't compiling. What's the problem?</h3>
+
+<p>I don't know. For support, <a href="https://github.com/larsgw/svm/issues/new">submit an issue</a> with relevant details (e.g. <code>*.svm</code> file, error message, Node.js version). </p>
+
+<h3>My model compiles, but doesn't work. What's the problem?</h3>
+
+<p>Probably your browser. Again, the webviewer isn't perfect, but the main problem is probably your browser not supporting the CSS or JS. It really depends on the type of problem you're having. Please <a href="https://github.com/larsgw/svm/issues/new">submit an issue</a> with relevant details (e.g. browser version, problem, screenshots, error messages).</p>
+
+<h3>Why not use <a href="https://aframe.io/">A-Frame</a>, <a href="http://xml3d.org/">xml3d</a>, etc.?</h3>
+
+<p>Those use WebGL, and my main goal is using HTML+CSS3D. This has advantages, like viewing element hierarchy and CSS in common debug environments, selecting text, embedding video's and pages, and not having to learn how to use WebGL.</p>
+
+<h3>Why not compile formats mentioned above into HTML+CSS3D?</h3>
+
+<p>Too complicated, ugh.</p>
+
+<p>Longer answer: Now I control the features I need to implement. It's not supposed to be some sort of standard, it's basically a replacement for having to type actual HTML+CSS3D models, which can be cool, but aren't really compatible, and a pain to make by hand.</p>
+
+<h3>What does SVM mean?</h3>
+
+<p>Scalable Vector (3D) Models. It says so in the description.</p>
+
+<h3>And that other thing called SVM?</h3>
+
+<p>Don't worry about it.</p>
+
+<p>Or, to make a bad pun: I don't give a faq.</p>
+</article>
+    </header>
   </body>
 </html>

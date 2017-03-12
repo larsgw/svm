@@ -15,16 +15,13 @@ The first version is still in development. Here are the current features:
   * rectangles
   * curves (based on SVG paths)
 * Other:
-  * Groups with names
+  * groups with names
 * Transformation for each shape, plane or group
 
-The webviewer (only HTML+CSS3D) has it's flaws:
+To view a compiled file, use the webviewer (only for HTML+CSS3D). **Note: It only works in certain browsers.**
 
-* The code is messy. This will be fixed after at least all the above features are done
-* It only works in certain browsers
-
-## Get started
-As I said, the first version (not `v1.0` but `v0.1`) is still in development. Documentation will be provided later. For now, I suggest looking at the example input (`*.svm`). The webviewer mentioned above is `/presents/?s=adminAccount&p=test`. Camera's and displayed models can be controlled in `/presents/js/adminaccount.js` (again, hardly readable).
+## Getting started
+As I said, the first version (not `v1.0` but `v0.1`) is still in development. Documentation will be provided later. For now, I suggest looking at the example input (`*.svm`). The webviewer mentioned above is [`demo.html`](https://larsgw.github.io/svm/demo.html). Camera's and displayed models can be controlled in `svm-example.json`.
 
 ### Transformations
 For camera's and including models, the following transformation options are available:
@@ -48,10 +45,8 @@ Disclaimer: will change in the future
 * Scroll: zoom; TG: zoom
 * WASD: move X and Z axis; RF: move Y axis
 * IJKL: rotate static Y and dynamic X axis; ZX: rotate Z axis
-* Q: Back to last camera
-* 1: Show axes
-* 2: Show layer toggle menu
-* 3: Re-align bottom camera menu (almost never necessary)
+* Q: move back to last camera
+* Arrow keys: change camera
 
 In the console, there's a short "performance report". If `Total` is above ~450 elements, things may get weird, but that really depends on the computer and browser.
 
@@ -60,13 +55,22 @@ First, install all node dependencies:
 
     node install
 
-Output is updated with `node .`. Process is controlled in `.svmconfig`. 
-Structure per line is:
+Output is updated with:
+
+    node .
+
+The compiling process is controlled in `.svmconfig`. Structure per line is:
 
 * Optional `#`: comments out line
 * Input file: `*.svm`
 * Method: Currently only `html`
 * Output file: `*.html`
+
+## Examples
+
+* [Example SVM files](https://github.com/larsgw/svm/tree/master/svm)
+* [WebViewer source example](https://github.com/larsgw/svm/tree/master/svm-example.json)
+* [WebViewer live example](https://larsgw.github.io/svm/demo.html)
 
 ## FAQ
 
@@ -74,7 +78,7 @@ Structure per line is:
 I don't know. For support, [submit an issue](https://github.com/larsgw/svm/issues/new) with relevant details (e.g. `*.svm` file, error message, Node.js version). 
 
 ### My model compiles, but doesn't work. What's the problem?
-Probably your browser. Again the webviewer isn't perfect, but the main problem is probably your browser not supporting the CSS (likely) or an error in the JS (possible). It really depends on the type of problem you're having. Please [submit an issue](https://github.com/larsgw/svm/issues/new) with relevant details (e.g. browser version, problem, screenshots, error messages).
+Probably your browser. Again, the webviewer isn't perfect, but the main problem is probably your browser not supporting the CSS or JS. It really depends on the type of problem you're having. Please [submit an issue](https://github.com/larsgw/svm/issues/new) with relevant details (e.g. browser version, problem, screenshots, error messages).
 
 ### Why not use [A-Frame](https://aframe.io/), [xml3d](http://xml3d.org/), etc.?
 Those use WebGL, and my main goal is using HTML+CSS3D. This has advantages, like viewing element hierarchy and CSS in common debug environments, selecting text, embedding video's and pages, and not having to learn how to use WebGL.
