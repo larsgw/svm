@@ -9,29 +9,29 @@ class WebViewer {
     }, config)
   }
   
-  static parseCamera (camera, zoom) {
+  static parseCamera (camera) {
     const cm = 37.8
     
-    if (camera.x && camera.x.slice(-2) === 'cm') {
-      camera.x = parseFloat(camera.x) * this.const.cm
+    if (camera.x && camera.x.slice && camera.x.slice(-2) === 'cm') {
+      camera.x = parseFloat(camera.x) * cm
     }
-    if (camera.y && camera.y.slice(-2) === 'cm') {
-      camera.y = parseFloat(camera.y) * this.const.cm
+    if (camera.y && camera.y.slice && camera.y.slice(-2) === 'cm') {
+      camera.y = parseFloat(camera.y) * cm
     }
-    if (camera.z && camera.z.slice(-2) === 'cm') {
-      camera.z = parseFloat(camera.z) * this.const.cm
+    if (camera.z && camera.z.slice && camera.z.slice(-2) === 'cm') {
+      camera.z = parseFloat(camera.z) * cm
     }
     
     const transform = {
-      x: -parseFloat(camera.x),
-      y: -parseFloat(camera.y),
-      z: -parseFloat(camera.z)
+      x: parseFloat(camera.x) || 0,
+      y: parseFloat(camera.y) || 0,
+      z: parseFloat(camera.z) || 0
     }
     const rotate = {
-      rotateZ: -parseFloat(camera.rz),
-      rotateX: -parseFloat(camera.rx),
-      rotateY: -parseFloat(camera.ry),
-      scale: this.config.zoom / parseFloat(camera.sc)
+      rotateZ: parseFloat(camera.rz) || 0,
+      rotateX: parseFloat(camera.rx) || 0,
+      rotateY: parseFloat(camera.ry) || 0,
+      scale: parseFloat(camera.sc) || 1
     }
     
     return {transform, rotate}
@@ -41,10 +41,20 @@ class WebViewer {
     switch (this.config.method) {
       case 'html':
       default:
+        this.currentCamera = WebViewer.parseCamera(camera)
+        
         const $containerR = this.element.find('.svm-container-rotate'),
               $containerT = this.element.find('.svm-container-transform'),
               method = animate ? 'transition' : 'css',
-              {transform, rotate} = this.currentCamera = WebViewer.parseCamera(camera)
+              {transform, rotate} = JSON.parse(JSON.stringify(this.currentCamera))
+        
+        transform.x *= -1
+        transform.y *= -1
+        transform.z *= -1
+        rotate.rotateZ *= -1
+        rotate.rotateX *= -1
+        rotate.rotateY *= -1
+        rotate.scale = this.config.zoom / rotate.scale
         
         $containerT[method](transform, animate)
         $containerR[method](rotate, animate)
@@ -54,8 +64,8 @@ class WebViewer {
   
   moveCamera (dCamera, animate) {
     const {
-      {x, y, z},
-      {
+      transform: {x, y, z},
+      rotate: {
         rotateZ,
         rotateX,
         rotateY,
@@ -64,8 +74,8 @@ class WebViewer {
     } = this.currentCamera
     
     const {
-      {x: dX, y: dY, z: dZ},
-      {
+      transform: {x: dX, y: dY, z: dZ},
+      rotate: {
         rotateZ: dRotateZ,
         rotateX: dRotateX,
         rotateY: dRotateY,
@@ -74,9 +84,7 @@ class WebViewer {
     } = WebViewer.parseCamera(dCamera)
     
     const camera = {
-      x: x + dX,
-      y: y + dY,
-      z: z + dZ,
+      x: x + dX, y: y + dY, z: z + dZ,
       rz: rotateZ + dRotateZ,
       rx: rotateX + dRotateX,
       ry: rotateY + dRotateY,
@@ -117,8 +125,11 @@ class WebViewer {
         break
     }
     
-    const camera = Object.assign({},
-      this.config.defaultCamera, this.source.cameras[this.source.current])
+    const camera = Object.assign(
+      {},
+      this.config.defaultCamera,
+      this.source.cameras[this.source.current]
+    )
     
     this.camera(camera, animate)
   }
@@ -206,317 +217,120 @@ $(function(){
     /*const*/ viewer = new WebViewer(data, config)
     viewer.view()
     
-    /*var mov = {},
-    slidewidth = 512,
-    slideheight = 288,
-    zoom = 1
-
-var $document = $(document),
-    $window = $(window),
-    $body,
-    $rotateContainer,
-    $translateContainer
-
-var classes = {
-  slideActive: 'active-slide',
-  dotActive: 'active-dot'
-},
-    selectors = {
-  slide: '.slide-container',
-  slideActive: '.slide-container.' + classes.slideActive,
-  slideViewable: '.slide-container:not([data-slide-type="html"])',
-  dot: '.dot',
-  dotActive: '.dot.' + classes.dotActive,
-  dotViewable: '.dot:not(.hide)'
-}
-
-function getKey (index) {
-  if (index >= 48 && 57 >= index) {
-    return '0123456789'[index - 48]
-  } else if (index >= 65 && 90 >= index) {
-    return 'abcdefghijklmnopqrstuvwxyz'[index - 65]
-  } else if (index === 16) {
-    return 'shft'
-  } else if (index === 17) {
-    return 'ctr'
-  } else {
-    return index
-  }
-}
-
-function updateScale (element, factor) {
-  var magnitude = (Math.log(parseFloat(element.css('scale'))) / Math.log(2)) + factor
-  
-  element.css('scale', Math.pow(2, magnitude).toString())
-}
-
-function updateFrame () {
-  if (mov.k) $rotateContainer.css('rotateX', '-=1')
-  if (mov.i) $rotateContainer.css('rotateX', '+=1')
-  if (mov.j) $rotateContainer.css('rotateY', '+=1')
-  if (mov.l) $rotateContainer.css('rotateY', '-=1')
-  if (mov.z) $rotateContainer.css('rotate' , '+=1')
-  if (mov.x) $rotateContainer.css('rotate' , '-=1')
-  
-  var movementSpeed = 7 / $rotateContainer.css('scale')
-  
-  if (mov.w) $translateContainer.css('z', '+=' + movementSpeed)
-  if (mov.s) $translateContainer.css('z', '-=' + movementSpeed)
-  if (mov.a) $translateContainer.css('x', '+=' + movementSpeed)
-  if (mov.d) $translateContainer.css('x', '-=' + movementSpeed)
-  if (mov.r) $translateContainer.css('y', '+=' + movementSpeed)
-  if (mov.f) $translateContainer.css('y', '-=' + movementSpeed)
-  
-  if (mov.t) updateScale($rotateContainer, 0.03)
-  if (mov.g) updateScale($rotateContainer,-0.03)
-}
-
-function switchSlide (nextSlide, nextDot, preventCallback) {
-  var currentSlide = $(selectors.slideActive),
-      currentDot = $('.active-dot')
-  
-  var duration = 1000,
-      position = nextSlide.data('position').split(' ').map(parseFloat),
-      effect = nextSlide.data('effect')
-  
-  if (modelIs3d) {
-    $(selectors.slide).removeClass('path')
+    const mov = {},
+          $body = $('body'),
+          $rotateContainer = $('.svm-container-rotate')
     
-    $translateContainer.transition({
-      x: -position[0] - slidewidth,
-      y: -position[1] - slideheight,
-      z: -position[2]
-    }, duration)
+    function getKey (index) {
+      if (index >= 48 && 57 >= index) {
+        return '0123456789'[index - 48]
+      } else if (index >= 65 && 90 >= index) {
+        return 'abcdefghijklmnopqrstuvwxyz'[index - 65]
+      } else if (index === 16) {
+        return 'shft'
+      } else if (index === 17) {
+        return 'ctr'
+      } else {
+        return index
+      }
+    }
+
+    const getNewScale = (old, factor) => Math.pow(2, Math.log2(old) + factor)
+
+    function updateFrame () {
+      const diff = {}
+      
+      if (mov.k) diff.rx = -2
+      if (mov.i) diff.rx =  2
+      if (mov.j) diff.ry = -2
+      if (mov.l) diff.ry =  2
+      if (mov.z) diff.rz = -2
+      if (mov.x) diff.rz =  2
+      
+      const movementSpeed = 14 * viewer.currentCamera.rotate.scale
+      
+      if (mov.w) diff.z = -movementSpeed
+      if (mov.s) diff.z =  movementSpeed
+      if (mov.a) diff.x = -movementSpeed
+      if (mov.d) diff.x =  movementSpeed
+      if (mov.r) diff.y = -movementSpeed
+      if (mov.f) diff.y =  movementSpeed
+      
+      if (mov.t) diff.sc = getNewScale(viewer.currentCamera.rotate.scale, 0.03)
+      if (mov.g) diff.sc = getNewScale(viewer.currentCamera.rotate.scale,-0.03)
+      
+      viewer.moveCamera(diff)
+    }
     
-    $rotateContainer.transition({
-      rotateX: -position[3],
-      rotateY: -position[4],
-      rotate : -position[5],
-      scale  :  position[6] !== 0 ? zoom / position[6] : position[6]
-    }, duration)
-  } else if (effect) {
-    currentSlide.effect(effect, 'swing', duration, function () {
-      currentSlide.css('display', 'block')
+    const nextSlide    = () => viewer.switchCamera('next'   , 500),
+          firstSlide   = () => viewer.switchCamera('first'  , 500),
+          lastSlide    = () => viewer.switchCamera('last'   , 500),
+          prevSlide    = () => viewer.switchCamera('prev'   , 500),
+          currentSlide = () => viewer.switchCamera('current', 500),
+          randSlide    = function () { viewer.switchCamera($(this).index(), 500) }
+
+    //BEGIN KEY CONTROLS
+    $body.keydown(function (e) {
+      const key = getKey(e.keyCode)
+      
+      if (typeof key === 'string') mov[key] = 1    // alphanumerical
+      
+      // Handeling
+      if (key === 34 ||
+          key === 37) prevSlide()                  // < or Pg down 
+      if (key === 32 ||
+          key === 33 ||
+          key === 39) nextSlide()                  // > or Pg up or space 
+      if (key === 36 ||
+          key === 40)firstSlide()                  // ∨ or Home 
+      if (key === 35 ||
+          key === 38) lastSlide()                  // ∧ or End 
+      
+      if (mov.ctr) {                               // ctr
+        if (mov.shft) {                            // ctr + shift
+          if (mov['1']) $('.svm-axis').toggle()    // ctr + shift + 1
+          if (mov['2']) $('#toggle-bar').toggle()  // ctr + shift + 2
+        } else {                                   // ctr
+        }
+      } else {
+        if (mov['q']) currentSlide()               // Q
+      }
     })
-  }
-  
-  if (!preventCallback) {
-    setTimeout(function () {
-      var videos = nextSlide.find('video')
-      if (videos.length) {
-        videos.get(0).currentTime = 0
-        videos.get(0).play()
-      }
+    
+    $body.keyup(function (e) {
+      const key = getKey(e.keyCode)
       
-      var moveData = nextSlide.data('move-data')
-      if (moveData) {
-        moveData = moveData.split(';').map(function (value) { return value.split(',') })
-        moveData.forEach(function (value) {
-          if (['addClass'].indexOf(value[1]) > -1) {
-            $(value[0])[value[1]](value[2])
-          } else {
-            var object = {}
-            object[value[1]] = value[2]
-            $(value[0]).transition(object, 800)
-          }
+      if (typeof key === 'string') mov[key] = 0
+    })
+    //END
+    
+    //BEGIN MOUSE CONTROLS
+    let mouseDown = false,
+        originalPos = null
+    
+    $body.on('vmousedown', function (e) {
+      e.preventDefault()
+      mouseDown = true, originalPos = { x: e.pageX, y: e.pageY }
+    })
+    
+    $body.on('vmouseup', function () { mouseDown = false })
+    
+    $body.on('vmousemove', function (e) {
+      if (mouseDown) {
+        viewer.moveCamera({
+          rx: ((originalPos.y - e.pageY) * -.3),
+          ry: ((e.pageX - originalPos.x) * -.3)
         })
+        originalPos = {x: e.pageX, y: e.pageY}
       }
-    }, duration)
-  }
-  
-  currentSlide.removeClass(classes.slideActive)
-  nextSlide.addClass(classes.slideActive)
-  currentDot.removeClass(classes.dotActive)
-  nextDot.addClass(classes.dotActive)
-}
-
-// next slide handeler
-function nextSlide () {
-  var $slideActive = $(selectors.slideActive),
-      video = $slideActive.find('video')
-  
-  if (video.data('paused')) {
-    video.get(0).play()
-  } else {
-    var slide = $slideActive.next(selectors.slideViewable),
-        dot = $(selectors.dotActive).next(selectors.dotViewable)
+    })
     
-    if (slide.length === 0) {
-      firstSlide()
-    } else {
-      switchSlide(slide, dot)
-    }
-  }
-}
-
-// first slide handeler
-function firstSlide () {
-  var slide = $(selectors.slideViewable).first(),
-      dot = $(selectors.dotViewable).first()
-  
-  switchSlide(slide, dot)
-}
-
-// last slide handeler
-function lastSlide () {
-  var slide = $(selectors.slideViewable).last(),
-      dot = $(selectors.dotViewable).last()
-  
-  switchSlide(slide, dot)
-}
-
-// prev slide handeler
-function prevSlide () {
-  var slide = $(selectors.slideActive).prev(selectors.slideViewable),
-      dot = $(selectors.dotActive).prev(selectors.dotViewable)
-  
-  if (slide.length === 0) {
-    lastSlide()
-  } else {
-    switchSlide(slide, dot)
-  }
-}
-
-// current slide handeler
-function currentSlide() {
-  var slide = $(selectors.slideActive),
-      dot = $(selectors.dotActive),
-      video = slide.find('video')
-  
-  if (video.length) {
-    video.get(0).currentTime = 0
-    video.get(0).play()
-  }
-  
-  switchSlide(slide, dot, true)
-}
-
-// random slide handeler (read: go to slide on the press of a button)
-function randSlide () {
-  var index = $(this).index(),
-      slide = $(selectors.slide).eq(index),
-      dot = $(selectors.dot).eq(index)
-  
-  switchSlide(slide, dot)
-}
-
-$document.on('ready', function () {
-  $body = $('body')
-  $rotateContainer = $('.rotate-container')
-  $translateContainer = $('.slides')
-  
-  //BEGIN KEY CONTROLS
-  $body.keydown(function (e) {
-    var key = getKey(e.keyCode)
+    $body.on('mousewheel', function (e) {
+      const scale = getNewScale(viewer.currentCamera.rotate.scale, -.3 * e.deltaY)
+      viewer.moveCamera({sc: scale / viewer.currentCamera.rotate.scale})
+    })
+    //END
     
-    if (typeof key === 'string') mov[key] = 1    // alphanumerical
-    
-    // Handeling
-    if (key === 34 ||
-        key === 37) prevSlide()                  // < or Pg down 
-    if (key === 32 ||
-        key === 33 ||
-        key === 39) nextSlide()                  // > or Pg up or space 
-    if (key === 36 ||
-        key === 40) firstSlide()                 // ∨ or Home 
-    if (key === 35 ||
-        key === 38) lastSlide()                  // ∧ or End 
-    
-    if (mov.ctr) {                               // ctr
-      if (mov.shft) {                            // ctr + shift
-        if (mov['h']) {                          // ctr + shift + H
-          hideHUD(!mov.hud)
-          mov.hud = !mov.hud * 1
-        }
-        if (mov['p']) printShow()                // ctr + shift + P
-        
-        if (mov['1']) showXs(!showXs())          // ctr + shift + 1 TODO add this
-        if (mov['2']) $('#toggle-bar').toggle()  // ctr + shift + 2 TODO add this
-        if (mov['3']) $window.resize()           // ctr + shift + 3 TODO Add align
-      } else {                                   // ctr
-      }
-    } else {
-      if (mov['q']) currentSlide()               // Q
-    }
-  })
-   
-  $body.keyup(function (e) {
-    var key = getKey(e.keyCode)
-    
-    if (typeof key === 'string') mov[key] = 0
-  })
-  //END
-  
-  //BEGIN MOUSE CONTROLS
-  var mouseDown = false,
-      originalPos = null
-  
-  $body.on('mousedown', function (e) {
-    e.preventDefault()
-    mouseDown = true, originalPos = { x: e.pageX, y: e.pageY }
-  })
-  
-  $body.on('mouseup', function () { mouseDown = false })
-  
-  $body.on('mousemove', function(e) {
-    if (mouseDown) {
-      $rotateContainer.css('rotateX', '+=' + ((originalPos.y - e.pageY) * 0.3))
-      $rotateContainer.css('rotateY', '+=' + ((e.pageX - originalPos.x) * 0.3))
-      
-      originalPos = {x: e.pageX, y: e.pageY}
-    }
-  })
-  
-  $body.on('mousewheel', function (e) {
-    updateScale($rotateContainer, 0.25 * Math.sign(e.deltaY))
-  })
-  //END
-})
-
-$window.on('load', function () {
-  $(selectors.slide).filter(':first-child').addClass(classes.slideActive)
-  $(selectors.dot).filter(':first-child').addClass(classes.dotActive)
-  $(selectors.dot).click(randSlide)
-  
-  $(selectors.slide).filter('[data-model-url]').each(function (_, elm) {
-    var $this = $(this)
-    $this.load($this.data('model-url'))
-  })
-  $(selectors.slide).find('video').each(function (_, elm) {
-    var $elm = $(elm)
-    
-    $elm.data('paused','')
-    
-    if ($elm.is('[data-media-loop]')) {
-      $elm.on('ended', function () {
-        $elm.data('paused','')
-        this.currentTime = parseFloat($elm.data('media-loop'))
-        this.play()
-      })
-    } else {
-      $elm.on('ended', function () {
-        $elm.data('paused','')
-        this.pause()
-        this.currentTime -= 0.1
-      })
-    }
-    if ($elm.is('[data-media-steps]')) {
-      var steps = $elm.data('media-steps').toString().split(',').map(parseFloat)
-      
-      $elm.on('timeupdate', function () {
-        var time = parseInt(this.currentTime, 10),
-            $this = $(this)
-        
-        if (steps.indexOf(time) > -1 && $this.data('paused') !== time.toString()) {
-          $this.data('paused', time.toString())
-          this.pause()
-        }
-      })
-    }
-  })
-  
-  currentSlide()
-  setInterval(updateFrame, 10)
-})*/
+    setInterval(updateFrame, 50)
   })
 })
