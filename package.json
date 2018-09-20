@@ -4,7 +4,7 @@
   "description": "Scalable Vector 3d Models",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "babel": "babel src -d lib"
   },
   "author": "Lars Willighagen",
   "license": "MIT",
@@ -12,5 +12,12 @@
     "color": "^1.0.3",
     "xml2js": "^0.4.17",
     "xmldoc": "^1.0.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.1.0",
+    "@babel/core": "^7.1.0",
+    "@babel/polyfill": "^7.0.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/register": "^7.0.0"
   }
 }
