@@ -1,11 +1,12 @@
 import cssPosition from '../../lib/position'
 import css from '../../lib/css'
-import {matrix, vec3, vec4, quat, deg, round} from '../math'
+import {gl, deg} from '../math/'
 
-let sun = vec3.fromValues(0, 1, 1)
+const {mat4, vec4, vec3, quat} = gl
+const sun = vec3.fromValues(0, 1, 1)
 
 function planeAngle (absTransform) {
-  let absRotate = matrix.fromQuat(matrix.create(), matrix.getRotation(quat.create(), absTransform))
+  let absRotate = mat4.fromQuat(mat4.create(), mat4.getRotation(quat.create(), absTransform))
   let normal = vec4.fromValues(0, 0, 1, 1)
   vec4.transformMat4(normal, normal, absRotate)
   let [x, y, z] = normal
@@ -50,14 +51,14 @@ function makePlane ({attr: options, data, parent}) {
 
   // NOTE: calculate matrix here vs in the browser
   if (false) {
-    transform = matrix.create()
+    transform = mat4.create()
     // center plane
-    matrix.translate(transform, transform, vec3.fromValues(-0.5 * width, -0.5 * height, 0))
+    mat4.translate(transform, transform, vec3.fromValues(-0.5 * width, -0.5 * height, 0))
     // apply transformation
-    matrix.multiply(transform, transform, data.transform)
-    transform = matrix.toCss(transform)
+    mat4.multiply(transform, transform, data.transform)
+    transform = mat4.toCss(transform)
   } else {
-    transfom = [
+    transform = [
       {x: -0.5 * width, y: -0.5 * height},
       ...options.transform
     ].map(cssPosition).join(' ')
@@ -73,7 +74,7 @@ function makePlane ({attr: options, data, parent}) {
     backgroundColor: color.string(),
 
     transformOrigin: '50% 50%',
-    transform/*: */
+    transform
   }
 }
 

@@ -4,7 +4,7 @@ let console = global.console
 delete global.console
 global.console = new console.Console(process.stderr)
 
-import {matrix} from './math'
+import {gl} from './math/'
 import * as converters from './convert/'
 import nodes from './nodes/'
 import Color from 'color'
@@ -38,10 +38,10 @@ function visitor (node) {
   }
 
   if (parent) {
-    newNode.attr.transform = matrix.fromSvmTransform(newNode.attr)
-    newNode.attr.absTransform = matrix.multiply(matrix.create(), parent.attr.absTransform, newNode.attr.transform)
+    newNode.attr.transform = gl.mat4.fromSvmTransform(newNode.attr)
+    newNode.attr.absTransform = gl.mat4.multiply(gl.mat4.create(), parent.attr.absTransform, newNode.attr.transform)
   } else {
-    newNode.attr.transform = matrix.fromSvmTransform(newNode.attr)
+    newNode.attr.transform = gl.mat4.fromSvmTransform(newNode.attr)
     newNode.attr.absTransform = newNode.attr.transform
   }
 
@@ -66,10 +66,10 @@ function visitor (node) {
     let data = {}
 
     data.transform = attr.transform.reduce((acc, transform) => {
-      matrix.multiply(acc, acc, matrix.fromSvmTransform(transform))
+      gl.mat4.multiply(acc, acc, gl.mat4.fromSvmTransform(transform))
       return acc
-    }, matrix.create())
-    data.absTransform = matrix.multiply(matrix.create(), newNode.attr.absTransform, data.transform)
+    }, gl.mat4.create())
+    data.absTransform = gl.mat4.multiply(gl.mat4.create(), newNode.attr.absTransform, data.transform)
 
     return {
       name: '_plane',

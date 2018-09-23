@@ -1,29 +1,4 @@
-import {deg, rad} from '../math'
-
-function polygon ({sides, radius}) {
-  let step = 2 * Math.PI / sides
-  let stepWidth = 2 * radius * Math.sin(0.5 * step)
-  let inscribedRadius = Math.sqrt(radius ** 2 - (0.5 * stepWidth) ** 2)
-
-  let relativePoints = []
-  let points = []
-
-  for (let i = 0; i < sides; i++) {
-    let x = 0.5 + 0.5 * Math.sin(step * i)
-    let y = 0.5 - 0.5 * Math.cos(step * i)
-    relativePoints.push([x, y])
-    points.push([x * radius, y * radius])
-  }
-
-  return {
-    relativePoints,
-    points,
-
-    step,
-    stepWidth,
-    inscribedRadius
-  }
-}
+import {deg, geo} from '../math/'
 
 let clipPath = {
   polygon (points) {
@@ -51,14 +26,14 @@ export default {
 
   prism ({sides, radius, height, hollow, open = hollow}) {
     let planes = []
-    let polygonData = polygon({sides, radius})
+    let polygon = geo.polygon({sides, radius})
 
     if (!open) {
       planes.push(
         {
           width: 2 * radius,
           height: 2 * radius,
-          path: clipPath.polygon(polygonData.relativePoints),
+          path: clipPath.polygon(polygon.relativePoints),
           transform: [{
             y: 0.5 * height,
             rx: 90,
@@ -68,7 +43,7 @@ export default {
         {
           width: 2 * radius,
           height: 2 * radius,
-          path: clipPath.polygon(polygonData.relativePoints),
+          path: clipPath.polygon(polygon.relativePoints),
           transform: [{
             y: -0.5 * height,
             rx: 90
@@ -77,14 +52,14 @@ export default {
       )
     }
 
-    let step = deg(polygonData.step)
+    let step = deg(polygon.step)
     for (let i = 0; i < sides; i++) {
       planes.push({
         height,
-        width: polygonData.stepWidth,
+        width: polygon.stepWidth,
         transform: [
           {ry: (0.5 + i) * step + 180},
-          {z: polygonData.inscribedRadius}
+          {z: polygon.inscribedRadius}
         ]
       })
     }
@@ -94,14 +69,14 @@ export default {
 
   pyramid ({sides, radius, height, hollow, open = hollow}) {
     let planes = []
-    let polygonData = polygon({sides, radius})
+    let pyramid = geo.pyramid({sides, radius, height})
 
     if (!open) {
       planes.push(
         {
           width: 2 * radius,
           height: 2 * radius,
-          path: clipPath.polygon(polygonData.relativePoints),
+          path: clipPath.polygon(pyramid.relativePoints),
           transform: [{
             y: 0.5 * height,
             rx: 90,
@@ -111,19 +86,64 @@ export default {
       )
     }
 
-    let step = deg(polygonData.step)
-    let inclination = deg(Math.atan2(polygonData.inscribedRadius, height))
-    let sideHeight = Math.hypot(height, polygonData.inscribedRadius)
+    for (let i = 0; i < sides; i++) {
+      planes.push({
+        height: pyramid.sideHeight,
+        width: pyramid.stepWidth,
+        transform: [
+          {ry: (0.5 + i) * deg(pyramid.step) + 180},
+          {z: 0.5 * pyramid.inscribedRadius, rx: deg(pyramid.inclination)}
+        ],
+        path: clipPath.polygon([[0.5, 0], [1, 1], [0, 1]])
+      })
+    }
+
+    return {planes}
+  },
+
+  frustum ({sides, radius, height, 'cap-height': capHeight, hollow, open = hollow}) {
+    let planes = []
+    let pyramid = geo.pyramid({sides, radius, height})
+    let ratio = capHeight / height
+
+    if (!open) {
+      planes.push(
+        {
+          width: 2 * radius,
+          height: 2 * radius,
+          path: clipPath.polygon(pyramid.relativePoints),
+          transform: [{
+            y: 0.5 * height,
+            rx: 90,
+            rz: 180
+          }]
+        },
+        {
+          width: 2 * radius * ratio,
+          height: 2 * radius * ratio,
+          path: clipPath.polygon(pyramid.relativePoints),
+          transform: [{
+            y: 0.5 * height - capHeight,
+            rx: 90
+          }]
+        }
+      )
+    }
 
     for (let i = 0; i < sides; i++) {
       planes.push({
-        height: sideHeight,
-        width: polygonData.stepWidth,
+        height: pyramid.sideHeight,
+        width: pyramid.stepWidth,
         transform: [
-          {ry: (0.5 + i) * step + 180},
-          {z: 0.5 * polygonData.inscribedRadius, rx: inclination}
+          {ry: (0.5 + i) * deg(pyramid.step) + 180},
+          {z: 0.5 * pyramid.inscribedRadius, rx: deg(pyramid.inclination)}
         ],
-        path: clipPath.polygon([[0.5, 0], [1, 1], [0, 1]])
+        path: clipPath.polygon([
+          [0.5 * ratio, 1 - ratio],
+          [1 - 0.5 * ratio, 1 - ratio],
+          [1, 1],
+          [0, 1]
+        ])
       })
     }
 
