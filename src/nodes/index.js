@@ -148,5 +148,13 @@ export default {
     }
 
     return {planes}
+  },
+
+  plane ({width, height}) {
+    return {
+      planes: [
+        {width, height, transform: []}
+      ]
+    }
   }
 }
