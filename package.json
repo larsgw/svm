@@ -10,7 +10,7 @@
   "license": "MIT",
   "dependencies": {
     "color": "^1.0.3",
-    "xml2js": "^0.4.17",
+    "gl-matrix": "^2.8.1",
     "xmldoc": "^1.0.0"
   },
   "devDependencies": {
