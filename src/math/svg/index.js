@@ -23,7 +23,7 @@ export class SvgPath {
   }
 
   static parsePath (path) {
-    return path.trim().split(/(?!^)\s*(?=[a-z])/i).map((command) => {
+    return path.trim().split(/(?!^)\s*(?=[a-df-z])/i).map((command) => {
       let type = command[0]
       let key = type.toUpperCase()
       let data = command.slice(1)
