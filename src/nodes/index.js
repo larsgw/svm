@@ -1,4 +1,4 @@
-import {deg, geo} from '../math/'
+import {deg, geo, svg} from '../math/'
 
 let clipPath = {
   polygon (points) {
@@ -156,5 +156,58 @@ export default {
         {width, height, transform: []}
       ]
     }
+  },
+
+  concave ({path, height}) {
+    let planes = []
+
+    path = new svg.SvgPath(path)
+    let polygons = path.getPolygons()
+    let dimensions = path.getDimensions()
+
+    for (let i = 0; i < polygons.length; i++) {
+      let polygon = polygons[i]
+      let {width, height: depth, xmin, ymin} = dimensions[i]
+      let path = polygon.map(([x, y]) => [(x - xmin) / width, (y - ymin) / depth])
+
+      planes.push({
+        width,
+        height: depth,
+        transform: [
+          {x: 0.5 * width + xmin, z: 0.5 * depth + ymin},
+          {rx: 90},
+          {z: 0.5 * height}
+        ],
+        path: clipPath.polygon(path)
+      }, {
+        width,
+        height: depth,
+        transform: [
+          {x: 0.5 * width + xmin, z: 0.5 * depth + ymin},
+          {rx: -90},
+          {z: 0.5 * height}
+        ],
+        path: clipPath.polygon(path.map(([x, y]) => [x, 1 - y]))
+      })
+
+      for (let i = 1; i < polygon.length; i++) {
+        let [x1, y1] = polygon[i - 1]
+        let [x2, y2] = polygon[i]
+        let dx = x2 - x1
+        let dy = y2 - y1
+
+        planes.push({
+          width: Math.hypot(dx, dy),
+          height,
+          transform: [{
+            x: x1 + 0.5 * dx,
+            z: y1 + 0.5 * dy,
+            ry: deg(-Math.atan2(dy, dx))
+          }]
+        })
+      }
+    }
+
+    return {planes}
   }
 }

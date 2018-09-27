@@ -1,4 +1,4 @@
-import {mat4, vec3, vec4, quat} from 'gl-matrix'
+import {mat2, mat3, mat4, vec2, vec3, vec4, quat} from 'gl-matrix'
 
 vec3.fromSvmTranslate = function ({x = 0, y = 0, z = 0}) {
   return vec3.fromValues(x, y, z)
@@ -24,4 +24,4 @@ mat4.toCss = function (transform) {
   return `matrix3d(${transform.join(',')})`
 }
 
-export {mat4, vec3, vec4, quat}
+export {mat2, mat3, mat4, vec2, vec3, vec4, quat}

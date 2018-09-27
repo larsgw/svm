@@ -1,7 +1,8 @@
 import * as geo from './geometry'
 import * as gl from './matrix'
+import * as svg from './svg/'
 
-export {geo, gl}
+export {geo, gl, svg}
 
 export const deg = rad => 180 * rad / Math.PI
 export const rad = deg => Math.PI * deg / 180
