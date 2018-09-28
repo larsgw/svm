@@ -4,6 +4,9 @@ import {gl, deg} from '../math/'
 
 const {mat4, vec4, vec3, quat} = gl
 const sun = vec3.fromValues(0, 1, 1)
+const turningPoint = 0.5
+const easingFunction = Math.sqrt
+const changeFactor = 0.5
 
 function planeAngle (absTransform) {
   let absRotate = mat4.fromQuat(mat4.create(), mat4.getRotation(quat.create(), absTransform))
@@ -18,25 +21,20 @@ function planeAngle (absTransform) {
 }
 
 function applyShadow (color, transform) {
-  const turningPoint = 0.5
-  const easingFunction = Math.sqrt
-  const changeFactor = 0.5
-
   // angle: 0-180
   let angle = planeAngle(transform)
   // shadow: 0-1
   let shadow = angle / 180
 
   let dark = shadow > turningPoint
-  let changeFunction = dark ? 'darken' : 'lighten'
 
   // shadow: 0-1
   shadow = (dark ? 1 : -1) * ((shadow / turningPoint) - 1)
-  shadow = Math.sqrt(shadow)
+  shadow = easingFunction(shadow)
   // shadow: 0-changeFactor
   shadow = shadow * changeFactor
 
-  return color[changeFunction](shadow)
+  return dark ? color.darken(shadow) : color.lighten(shadow)
 }
 
 function px (num) {
