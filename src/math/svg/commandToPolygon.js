@@ -21,7 +21,7 @@ function getEllipse (prev, next, rx, ry, rotation, negate) {
   let [x2, y2] = next
 
   // see https://www.w3.org/TR/SVG/implnote.html#ArcCorrectionOutOfRangeRadii
-  let lambda = x1 ** 2 / rx ** 2 + y1 ** 2 / ry ** 2
+  let lambda = (0.5 * (x1 - x2)) ** 2 / rx ** 2 + (0.5 * (y1 - y2)) ** 2 / ry ** 2
   if (lambda > 1) {
     rx *= Math.sqrt(lambda)
     ry *= Math.sqrt(lambda)
