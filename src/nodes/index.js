@@ -236,5 +236,53 @@ export default {
     }
 
     return {planes}
+  },
+
+  sphere ({radius}) {
+    let longitude = 12
+    let latitude = longitude / 2
+    let longitudeStep = 2 * Math.PI / longitude
+    let latitudeStep = Math.PI / latitude
+
+    let planes = []
+
+    let height = 2 * radius * Math.sin(0.5 * latitudeStep)
+    let midRadius = radius * Math.cos(0.5 * latitudeStep)
+    let inscribedRadius = midRadius * Math.cos(0.5 * longitudeStep)
+    let c = 2 * Math.sin(0.5 * longitudeStep)
+
+    for (let i = 0; i < latitude; i ++) {
+      let bottomAngle = i * latitudeStep
+      let topAngle = (i + 1) * latitudeStep
+      let bottomRadius = radius * Math.abs(Math.sin(bottomAngle))
+      let topRadius = radius * Math.abs(Math.sin(topAngle))
+
+      for (let i = 0; i < longitude; i++) {
+        let leftAngle = i * longitudeStep
+        let rightAngle = (i + 1) * longitudeStep
+
+        let bottomWidth = bottomRadius * c
+        let topWidth = topRadius * c
+        let width = Math.max(topWidth, bottomWidth)
+
+        planes.push({
+          width,
+          height,
+          transform: [
+            {ry: deg(0.5 * (leftAngle + rightAngle))},
+            {rx: deg(0.5 * (bottomAngle + topAngle) - Math.PI * 0.5)},
+            {z: inscribedRadius}
+          ],
+          path: clipPath.polygon([
+            [0.5 * (1 - topWidth / width), 0],
+            [0.5 * (1 + topWidth / width), 0],
+            [0.5 * (1 + bottomWidth / width), 1],
+            [0.5 * (1 - bottomWidth / width), 1]
+          ])
+        })
+      }
+    }
+
+    return {planes}
   }
 }
