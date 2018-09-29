@@ -209,5 +209,32 @@ export default {
     }
 
     return {planes}
+  },
+
+  curve ({path, height}) {
+    let planes = []
+
+    path = new svg.SvgPath(path)
+
+    for (let polygon of path.getPolygons()) {
+      for (let i = 1; i < polygon.length; i++) {
+        let [x1, y1] = polygon[i - 1]
+        let [x2, y2] = polygon[i]
+        let dx = x2 - x1
+        let dy = y2 - y1
+
+        planes.push({
+          width: Math.hypot(dx, dy),
+          height,
+          transform: [{
+            x: x1 + 0.5 * dx,
+            z: y1 + 0.5 * dy,
+            ry: deg(-Math.atan2(dy, dx))
+          }]
+        })
+      }
+    }
+
+    return {planes}
   }
 }
